@@ -1,0 +1,48 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <!--登陆界面样式-->
+    <style name="AppTheme.Dark" parent="Theme.AppCompat.NoActionBar">
+        <item name="colorPrimary">@color/certainblue</item>
+        <item name="colorPrimaryDark">@color/certainblue</item>
+        <item name="colorAccent">@color/black</item>
+
+        <item name="android:windowBackground">@color/white</item>
+        <item name="android:textColor">@color/certainblue</item>
+
+        <item name="colorControlNormal">@color/iron</item>
+        <item name="colorControlActivated">@color/certainblue</item>
+        <item name="colorControlHighlight">@color/certainblue</item>
+        <item name="android:textColorHint">@color/iron</item>
+    </style>
+    <!--登陆界面按钮样式-->
+    <style name="ButtonTheme" parent="@style/Theme.AppCompat.Light.DarkActionBar">
+
+        <item name="colorButtonNormal">@color/certainblue</item><!--正常状态下的颜色  -->
+        <item name="colorControlHighlight">#22000000</item><!--覆盖色，按下的颜色  -->
+    </style>
+    <!--登陆提示框按钮样式-->
+    <style name="AppTheme.Dark.Dialog" parent="Theme.AppCompat.Dialog">
+        <item name="colorAccent">@color/certainblue</item>
+        <item name="android:textColorPrimary">@color/iron</item>
+        <item name="android:background">@color/white</item>
+    </style>
+    <!--登陆界面样式END-->
+
+</resources>
