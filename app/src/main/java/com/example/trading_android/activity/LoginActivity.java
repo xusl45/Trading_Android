@@ -76,6 +76,7 @@ public class LoginActivity extends AppCompatActivity {
                 account = accounttext.getText().toString();
                 pwdtext = findViewById(R.id.input_password);
                 pwd = pwdtext.getText().toString();
+<<<<<<< HEAD
                 sendRequestwithOKhttp();
             }
         });
@@ -87,11 +88,20 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(LoginActivity.this, SignUPActivity.class);
                 startActivity(intent);
+=======
+
+
+                sendRequestwithOKhttp();
+
+>>>>>>> 9c685d5d62ff0d27a2af6b101758fdbe12b41179
 
             }
         });
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 9c685d5d62ff0d27a2af6b101758fdbe12b41179
     };
 
     private void sendRequestwithOKhttp() {
