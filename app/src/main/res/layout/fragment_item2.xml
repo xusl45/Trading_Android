@@ -63,7 +63,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:background="#FFFFFF"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp">
+
 
                 <GridView
                     android:id="@+id/gridview"
@@ -73,23 +76,45 @@
                 </GridView>
 
             </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/hotlayout"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_below="@+id/banner_layout"
+                android:layout_alignParentStart="true">
 
+                <ImageView
+                    android:layout_width="50px"
+                    android:layout_height="50px"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/hot_title"
+                    android:src="@drawable/home53" />
+
+                <TextView
+                    android:id="@+id/hot_title"
+                    android:layout_width="200px"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:paddingLeft="5dp"
+                    android:text="热销产品"
+                    android:textColor="#FF4040"
+                    android:textSize="45px" />
+            </RelativeLayout>
             <RelativeLayout
                 android:id="@+id/commodity"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/red"
                >
 
                 <com.example.trading_android.view.ExpandableGridView
                     android:id="@+id/gridviewCommmodity"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:horizontalSpacing="2dp"
-                    android:verticalSpacing="2dp"
+                    android:horizontalSpacing="3dp"
+                    android:verticalSpacing="3dp"
                     android:stretchMode="columnWidth"
                     android:gravity="center"
-                    android:background="#DCDCDC"/>
+                    android:background="#33ffffff"/>
             </RelativeLayout>
         </LinearLayout>
 

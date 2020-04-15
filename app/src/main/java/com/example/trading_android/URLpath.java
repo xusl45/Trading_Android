@@ -42,7 +42,10 @@ public class URLpath {
      * 商品类型接口Url
      */
     public static final String GET_COMMODITY_TYPES_URL = "/findCommoditySort";
-
+    /**
+     * 根据商品类型寻找商品
+     */
+    public static final String GET_COMMODITY_BY_SORT_URL = "/findCommodityOfSort";
     /**
      * 分页获取商品列表Url
      */

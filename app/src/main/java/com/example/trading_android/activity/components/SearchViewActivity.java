@@ -1,13 +1,18 @@
 package com.example.trading_android.activity.components;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Toast;
 
 import com.example.trading_android.R;
+import com.example.trading_android.activity.LoginActivity;
+import com.example.trading_android.activity.SearchCommodityActivity;
+import com.example.trading_android.tableView.MainActivity;
 
 import scut.carson_ho.searchview.ICallBack;
 import scut.carson_ho.searchview.SearchView;
@@ -21,7 +26,7 @@ public class SearchViewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         // 2. 绑定视图
-        setContentView(R.layout.activity_search);
+        setContentView(R.layout.search_api);
 
         // 3. 绑定组件
         searchView = (SearchView) findViewById(R.id.search_view);
@@ -31,7 +36,12 @@ public class SearchViewActivity extends AppCompatActivity {
         searchView.setOnClickSearch(new ICallBack() {
             @Override
             public void SearchAciton(String string) {
-                System.out.println("我收到了" + string);
+                Bundle mBundle = new Bundle();
+                mBundle.putString("name",string);
+                Intent intent = new Intent(SearchViewActivity.this, SearchCommodityActivity.class);
+                intent.putExtras(mBundle);
+                startActivity(intent);
+                finish();
             }
         });
 

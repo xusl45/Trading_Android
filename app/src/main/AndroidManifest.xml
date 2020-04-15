@@ -28,6 +28,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.SignUPActivity"></activity>
+        <activity android:name=".activity.SearchCommodityActivity"/>
     </application>
 
 </manifest>

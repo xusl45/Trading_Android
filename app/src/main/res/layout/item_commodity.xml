@@ -18,7 +18,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="AIR JADAN 1 黑曜石配色"
-        android:textSize="14dp">
+        android:textSize="14dp"
+        android:layout_marginLeft="10dp">
 
     </TextView>
     <RelativeLayout
@@ -32,7 +33,9 @@
             android:layout_alignParentLeft="true"
             android:textColor="@color/black"
             android:text="￥500"
-            android:textSize="12dp">
+            android:textSize="12dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp">
         </TextView>
         <TextView
             android:id="@+id/commodityNum"
@@ -40,7 +43,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:text="500付款"
-            android:textSize="12dp">
+            android:textSize="12dp"
+            android:layout_marginRight="10dp">
         </TextView>
     </RelativeLayout>
 

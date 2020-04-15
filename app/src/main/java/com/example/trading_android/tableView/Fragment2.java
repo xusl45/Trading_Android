@@ -310,7 +310,6 @@ public class Fragment2 extends Fragment {
                     searchView.clearFocus();
                 else {
                     Intent intent = new Intent(getActivity(), SearchViewActivity.class);
-                    intent.putExtra("fatherName", ".HomePage");
                     startActivityForResult(intent, 1);
 //                    startActivity(intent);
                 }

@@ -3,20 +3,63 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal">
+    android:orientation="vertical">
 
 
-    <scut.carson_ho.searchview.SearchView
-        android:id="@+id/search_view"
+    <LinearLayout
+        android:id="@+id/title"
         android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="@color/blue"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/app_name"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:textStyle="italic|bold" />
+
+        <SearchView
+            android:id="@+id/home_serachview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:background="@color/white"
+            android:focusable="false"
+            android:iconifiedByDefault="false"
+            android:queryHint="@string/home_search"></SearchView>
+    </LinearLayout>
+    <Button
+        android:id="@+id/teet"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:textSizeSearch="5dp"
-        app:textColorSearch="#3F51B5"
-        app:textHintSearch="输入查询关键字"
-        app:searchBlockHeight="150"
-        app:searchBlockColor="#ffffff"
-        app:submitBackground="@color/blue"
-        android:background="@color/white"
-        />
+        android:text="cesfa">
+    </Button>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <RelativeLayout
+            android:id="@+id/commodity"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+            <com.example.trading_android.view.ExpandableGridView
+                android:id="@+id/gridviewCommmodity"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:horizontalSpacing="3dp"
+                android:verticalSpacing="3dp"
+                android:stretchMode="columnWidth"
+                android:gravity="center"
+                android:background="#33ffffff"/>
+        </RelativeLayout>
+    </ScrollView>>
 </LinearLayout>
 
