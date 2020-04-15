@@ -15,6 +15,8 @@
         app:textHintSearch="输入查询关键字"
         app:searchBlockHeight="150"
         app:searchBlockColor="#ffffff"
+        app:submitBackground="@color/blue"
+        android:background="@color/white"
         />
 </LinearLayout>
 

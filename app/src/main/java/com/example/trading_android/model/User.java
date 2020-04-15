@@ -1,22 +1,24 @@
 package com.example.trading_android.model;
 
 
+
 public class User {
-    private  int uid;
-    private  String  username;
-    private  String  password;
-    private  String  sex;
-    private  String  nickname;
-    private  String  email;
 
-    public int getUid() {
-        return uid;
+    private Integer id;
+
+
+    private String username;
+    private String password;
+    private boolean state;
+    private UserMessage userMessages;
+
+    public Integer getId() {
+        return id;
     }
 
-    public void setUid(int uid) {
-        this.uid = uid;
+    public void setId(Integer id) {
+        this.id = id;
     }
-
     public String getUsername() {
         return username;
     }
@@ -24,6 +26,7 @@ public class User {
     public void setUsername(String username) {
         this.username = username;
     }
+
 
     public String getPassword() {
         return password;
@@ -33,39 +36,30 @@ public class User {
         this.password = password;
     }
 
-    public String getSex() {
-        return sex;
+    public boolean isState() {
+        return state;
     }
 
-    public void setSex(String sex) {
-        this.sex = sex;
+    public void setState(boolean state) {
+        this.state = state;
     }
 
-    public String getNickname() {
-        return nickname;
+    public UserMessage getUserMessages() {
+        return userMessages;
     }
 
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUserMessages(UserMessage userMessages) {
+        this.userMessages = userMessages;
     }
 
     @Override
     public String toString() {
         return "User{" +
-                "uid=" + uid +
+                "id=" + id +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
-                ", sex='" + sex + '\'' +
-                ", nickname='" + nickname + '\'' +
-                ", email='" + email + '\'' +
+                ", state=" + state +
+                ", userMessages=" + userMessages +
                 '}';
     }
 }

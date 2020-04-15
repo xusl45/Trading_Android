@@ -2,21 +2,37 @@ package com.example.trading_android.tableView;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.trading_android.R;
+import com.example.trading_android.URLpath;
 import com.example.trading_android.activity.components.SearchViewActivity;
+import com.example.trading_android.adapter.CommodityHotSearchAdapter;
+import com.example.trading_android.adapter.CommoditySortAdapter;
+import com.example.trading_android.model.Commodity;
+import com.example.trading_android.model.CommodityBanner;
+import com.example.trading_android.model.CommoditySort;
+import com.example.trading_android.view.ExpandableGridView;
+import com.example.trading_android.util.ServerResponse;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.zhouwei.mzbanner.MZBannerView;
 import com.zhouwei.mzbanner.holder.MZHolderCreator;
 import com.zhouwei.mzbanner.holder.MZViewHolder;
@@ -24,46 +40,203 @@ import com.zhouwei.mzbanner.holder.MZViewHolder;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+
 
 public class Fragment2 extends Fragment {
-    private Button button;
+    private static final int UPDATE_SORT= 1;
+    private static final int UPDATE_BANNER= 2;
+    private static final int UPDATE_Search= 3;
     public static final String TAG = "MZModeBannerFragment";
-    public static final int []BANNER = new int[]{R.mipmap.banner1,R.mipmap.banner2,R.mipmap.banner3,R.mipmap.banner4,R.mipmap.banner5};
     private MZBannerView mMZBanner;
     private SearchView searchView;
+    private ServerResponse<List<CommoditySort>> serverResponse;
+    private ServerResponse<List<CommodityBanner>>  serverResponseBanner;
+    private ServerResponse<List<Commodity>> serverResponseCommodity;
+    //商品数据源
+    private List<Commodity> commodities = new ArrayList<>();
+    private List<CommoditySort> commoditySorts = new ArrayList<>();
+    private List<CommodityBanner> commodityBanners = new ArrayList<>();
+    private  GridView gridView;
+    private ExpandableGridView gridViewCommodity;
+    /**
+     * 下拉刷新的layout
+     */
+    private SwipeRefreshLayout mRefreshLayout;
 
+    private Handler mHandler = new Handler() {
 
-    public static Fragment2 newInstance(){
-        return new Fragment2();
-    }
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case UPDATE_SORT:
+                    //初始化gridview
+                    CommoditySortAdapter mAdapter=new CommoditySortAdapter(commoditySorts, getActivity());
+                    gridView.setAdapter(mAdapter);
+                    gridView.setNumColumns(4);
+                    break;
+                case UPDATE_BANNER:
+                    //初始化gridview
+                    initView(getView());
+                    break;
+                case UPDATE_Search:
+                    CommodityHotSearchAdapter hAdapter=new CommodityHotSearchAdapter(commodities, getActivity());
+                    gridViewCommodity.setAdapter(hAdapter);
+                    gridViewCommodity.setNumColumns(2);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        ;
+    };
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle
             savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_item2, null);
-        initView(view);
+        gridView = (GridView) view.findViewById(R.id.gridview);
+        gridViewCommodity = (ExpandableGridView) view.findViewById(R.id.gridviewCommmodity);
+//        // 刷新监听。
+//        mRefreshLayout.setOnRefreshListener(mRefreshListener);
         return view;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        button =(Button)getActivity().findViewById(R.id.buttomView3);
-        button.setOnClickListener(new View.OnClickListener(){
-
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getActivity(),"test",Toast.LENGTH_SHORT).show();
-            }
-        });
         searchView = getActivity().findViewById(R.id.home_serachview);
         setSearchViewIntent();
+        initPost();
+    }
+
+//    /**
+//     * 刷新
+//     */
+//    private SwipeRefreshLayout.OnRefreshListener mRefreshListener = new SwipeRefreshLayout.OnRefreshListener() {
+//        @Override
+//        public void onRefresh() {
+//            //获取分类
+//            initPost();
+//        }
+//    };
+
+    private void initPost() {
+        getBanners();
+        getCommodityType();
+        getCommodity();
 
     }
 
-//轮播图定义类
-    public static class BannerViewHolder implements MZViewHolder<Integer> {
+    private void getCommodity() {
+        final String urlFindMessage = URLpath.BASE_URL+URLpath.GET_COMMODITY_URL;
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    String username = ((MainActivity) getActivity()).getUsername();
+                    OkHttpClient client = new OkHttpClient();
+                    RequestBody requestBody = new FormBody.Builder()
+                            .add("name","詹姆斯")
+                            .build();
+                    Request request = new Request.Builder()
+                            .url(urlFindMessage)
+                            .post(requestBody)
+                            .build();
+                    Response response = client.newCall(request).execute();
+                    String responsedate = response.body().string();
+                    Gson gson = new  Gson();
+                    serverResponseCommodity = gson.fromJson(responsedate,new TypeToken<ServerResponse<List<Commodity>>>(){}.getType());
+                    commodities = (List<Commodity>) serverResponseCommodity.getData();
+                    for (Commodity commodity:commodities)
+                    {
+                        Log.d(TAG,commodity.toString());
+                    }
+                    Message msg=Message.obtain();
+                    msg.what=UPDATE_Search;
+                    mHandler.sendMessage(msg);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
+
+    private void getBanners() {
+        final String urlFindMessage = URLpath.BASE_URL+URLpath.BASE_ADS_URL;
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    String username = ((MainActivity) getActivity()).getUsername();
+                    OkHttpClient client = new OkHttpClient();
+                    RequestBody requestBody = new FormBody.Builder()
+                            .build();
+                    Request request = new Request.Builder()
+                            .url(urlFindMessage)
+                            .post(requestBody)
+                            .build();
+                    Response response = client.newCall(request).execute();
+                    String responsedate = response.body().string();
+                    Gson gson = new  Gson();
+                    serverResponseBanner = gson.fromJson(responsedate,new TypeToken<ServerResponse<List<CommodityBanner>>>(){}.getType());
+                    commodityBanners = (List<CommodityBanner>) serverResponseBanner.getData();
+                    for (CommodityBanner commoditySort:commodityBanners)
+                    {
+                        Log.d(TAG,commoditySort.toString());
+                    }
+                    Message msg=Message.obtain();
+                    msg.what=UPDATE_BANNER;
+                    mHandler.sendMessage(msg);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
+
+    private void getCommodityType() {
+        final String urlFindMessage = URLpath.BASE_URL+URLpath.GET_COMMODITY_TYPES_URL;
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    String username = ((MainActivity) getActivity()).getUsername();
+                    OkHttpClient client = new OkHttpClient();
+                    RequestBody requestBody = new FormBody.Builder()
+                            .build();
+                    Request request = new Request.Builder()
+                            .url(urlFindMessage)
+                            .post(requestBody)
+                            .build();
+                    Response response = client.newCall(request).execute();
+                    String responsedate = response.body().string();
+                    Gson gson = new  Gson();
+                    serverResponse = gson.fromJson(responsedate,new TypeToken<ServerResponse<List<CommoditySort>>>(){}.getType());
+                    commoditySorts = (List<CommoditySort>) serverResponse.getData();
+//                    for (CommoditySort commoditySort:commoditySorts)
+//                    {
+//                        Log.d(TAG,commoditySort.toString());
+//                    }
+                    Message msg=Message.obtain();
+                    msg.what=UPDATE_SORT;
+                    mHandler.sendMessage(msg);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
+
+
+
+    //轮播图定义类
+    public static class BannerViewHolder implements MZViewHolder<String> {
         private ImageView mImageView;
         @Override
         public View createView(Context context) {
@@ -74,12 +247,14 @@ public class Fragment2 extends Fragment {
         }
 
         @Override
-        public void onBind(Context context, int position, Integer data) {
+        public void onBind(Context context, int position, String data) {
             // 数据绑定
-            mImageView.setImageResource(data);
+            Glide.with(context)
+                    .load(data)
+                    .into(mImageView);
         }
     }
-//轮播图设置数据
+    //轮播图设置数据
     private void initView(View view) {
 
         mMZBanner = (MZBannerView) view.findViewById(R.id.banner);
@@ -105,9 +280,10 @@ public class Fragment2 extends Fragment {
 
             }
         });
-        List<Integer> bannerList = new ArrayList<>();
-        for(int i=0;i<BANNER.length;i++){
-            bannerList.add(BANNER[i]);
+        List<String> bannerList = new ArrayList<>();
+        for (CommodityBanner commodityBanner :commodityBanners)
+        {
+            bannerList.add(commodityBanner.getImgPath());
         }
         mMZBanner.setIndicatorVisible(true);
         // 代码中更改indicator 的位置
@@ -121,7 +297,7 @@ public class Fragment2 extends Fragment {
         });
     }
 
-//   searchView点击跳转
+    //   searchView点击跳转
     private void setSearchViewIntent() {
         searchView.setFocusable(false);
         searchView.clearFocus();
@@ -144,13 +320,13 @@ public class Fragment2 extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        mMZBanner.pause();//暂停轮播
+//        mMZBanner.pause();//暂停轮播
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        mMZBanner.start();//开始轮播
+//        mMZBanner.start();//开始轮播
     }
 
 }

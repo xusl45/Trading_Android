@@ -1,6 +1,5 @@
 package com.example.trading_android.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -15,9 +14,8 @@ import android.widget.Toast;
 
 import com.example.trading_android.R;
 import com.example.trading_android.URLpath;
-import com.example.trading_android.model.ServerResponse;
+import com.example.trading_android.util.ServerResponse;
 import com.example.trading_android.model.User;
-import com.example.trading_android.tableView.MainActivity;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 

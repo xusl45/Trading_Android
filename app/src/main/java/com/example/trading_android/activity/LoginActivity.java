@@ -15,7 +15,7 @@ import android.widget.Toast;
 
 import com.example.trading_android.R;
 import com.example.trading_android.URLpath;
-import com.example.trading_android.model.ServerResponse;
+import com.example.trading_android.util.ServerResponse;
 import com.example.trading_android.model.User;
 import com.example.trading_android.tableView.MainActivity;
 import com.google.gson.Gson;
@@ -131,9 +131,9 @@ public class LoginActivity extends AppCompatActivity {
             user = (User) serverResponse.getData();
             message.what = UPDATE_TECT;
             mHandler.sendMessage(message);
-            String value = String.valueOf(user.getUid());
+            String value = String.valueOf(user.getUsername());
             Bundle mBundle = new Bundle();
-            mBundle.putString("id",value);
+            mBundle.putString("username",value);
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
             intent.putExtras(mBundle);
             Log.d("test12311111111", "许舒隆"+value);

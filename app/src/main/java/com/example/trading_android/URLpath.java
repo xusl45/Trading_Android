@@ -16,7 +16,7 @@ public class URLpath {
     /**
      * 基础广告地址
      */
-    public static final String BASE_ADS_URL = "http://wishes-blog.cn:9002/ads";
+    public static final String BASE_ADS_URL = "/findCommodityBanner";
 
     /**
      * 登录Url
@@ -29,9 +29,9 @@ public class URLpath {
     public static final String REGISTER_URL = "/apply";
 
     /**
-     * 根据用户id获取用户信息的Url
+     * 根据用户username获取用户信息的Url
      */
-    public static final String GET_USER_INFO_BY_UID_URL = "/control/getUserInfoByUid?uId=";
+    public static final String GET_USER_INFO_BY_UID_URL = "/findUserMessage";
 
     /**
      * 修改用户昵称和密码的Url
@@ -41,12 +41,12 @@ public class URLpath {
     /**
      * 商品类型接口Url
      */
-    public static final String GET_COMMODITY_TYPES_URL = "/business/queryCommodityTypes";
+    public static final String GET_COMMODITY_TYPES_URL = "/findCommoditySort";
 
     /**
      * 分页获取商品列表Url
      */
-    public static final String GET_COMMODITY_URL = "/business/queryPage";
+    public static final String GET_COMMODITY_URL = "/findOneCommodity";
 
     /**
      * 根据商品id获取商品详情Url
@@ -88,29 +88,6 @@ public class URLpath {
      */
     public static final String GET_QUERY_BUY_HISTORY_URL = "/business/queryBoughtList?limit=9999999&page=1";
 
-    /**
-     * 广告Url枚举
-     */
-    public enum ADS {
-        ADS_URL1("/1.jpg", "广告1"),
-        ADS_URL2("/2.jpg", "广告2");
-
-        String url;
-        String message;
-
-        ADS(String url, String message) {
-            this.url = url;
-            this.message = message;
-        }
-
-        public String getUrl() {
-            return url;
-        }
-
-        public String getMessage() {
-            return message;
-        }
-    }
 
     /**
      * 定义首页分页获取商品数量

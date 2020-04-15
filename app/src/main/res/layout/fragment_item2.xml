@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/first_head_title_color">
 
     <LinearLayout
         android:id="@+id/title"
@@ -27,36 +28,72 @@
         <SearchView
             android:id="@+id/home_serachview"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:background="@color/white"
             android:focusable="false"
             android:iconifiedByDefault="false"
             android:queryHint="@string/home_search"></SearchView>
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="fragment2"
-        android:textSize="20sp"/>
-    <com.zhouwei.mzbanner.MZBannerView
-        android:id="@+id/banner"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginTop="10dp"
-        app:open_mz_mode="true"
-        app:canLoop="true"
-        app:indicatorAlign="center"
-        app:indicatorPaddingLeft="10dp"
-        />
-    <Button
-        android:id="@+id/buttomView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="test3"></Button>
+        android:layout_height="match_parent"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <RelativeLayout
+            android:id="@+id/home_page"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+                <com.zhouwei.mzbanner.MZBannerView
+                    android:id="@+id/banner"
+                    android:layout_width="match_parent"
+                    android:layout_height="160dp"
+                    app:open_mz_mode="false"
+                    app:canLoop="true"
+                    app:indicatorAlign="center"
+                    app:indicatorPaddingLeft="10dp"
+                    />
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/product"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:background="#FFFFFF"
+                android:orientation="vertical">
+
+                <GridView
+                    android:id="@+id/gridview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:numColumns="auto_fit" >
+                </GridView>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/commodity"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/red"
+               >
+
+                <com.example.trading_android.view.ExpandableGridView
+                    android:id="@+id/gridviewCommmodity"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:horizontalSpacing="2dp"
+                    android:verticalSpacing="2dp"
+                    android:stretchMode="columnWidth"
+                    android:gravity="center"
+                    android:background="#DCDCDC"/>
+            </RelativeLayout>
+        </LinearLayout>
+
+    </ScrollView>
 
 
 </LinearLayout>

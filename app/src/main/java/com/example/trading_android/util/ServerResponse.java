@@ -1,4 +1,4 @@
-package com.example.trading_android.model;
+package com.example.trading_android.util;
 
 
 public class ServerResponse<T> {

@@ -38,4 +38,11 @@
     <color name="monsoon">#777777</color>
     <color name="jumbo">#888888</color>
     <color name="aluminum">#999999</color>
+
+    <!-- “我的”界面描边颜色 -->
+    <color name="border_clo">#ccc</color>
+    <color name="text_clo">#333</color>
+    <color name="titlebarColor">#387ef5</color>
+    <!--关于我的界面-->
+    <color name="background_dark">#ECECEC</color>
 </resources>

@@ -1,5 +1,6 @@
 package com.example.trading_android.tableView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -31,12 +32,24 @@ public class MainActivity extends FragmentActivity implements
     private List<Fragment> list = new ArrayList<Fragment>();
     private ViewPager vp;
 
+    private String username;
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();//初始化控件
         initPage();//初始化页面
+        Intent intent = getIntent();
+        Bundle mbundle = intent.getExtras();
+        username = mbundle.getString("username");
     }
 
     //    控件初始化控件
