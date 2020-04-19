@@ -1,4 +1,4 @@
-package com.example.trading_android.tableView;
+package com.example.trading_android.fragment;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -21,19 +21,14 @@ import com.example.trading_android.R;
 import com.example.trading_android.URLpath;
 import com.example.trading_android.model.Fram;
 import com.example.trading_android.model.User;
-import com.example.trading_android.model.UserMessage;
-import com.example.trading_android.util.GsonUtil;
-import com.example.trading_android.util.ImageTools;
 import com.example.trading_android.util.ServerResponse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.InputStream;
-import java.net.MalformedURLException;
 import java.net.URL;
 
-import de.hdodenhof.circleimageview.CircleImageView;
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;

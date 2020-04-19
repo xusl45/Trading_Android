@@ -10,17 +10,13 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.trading_android.R;
 import com.example.trading_android.activity.SearchCommodityActivity;
-import com.example.trading_android.activity.components.SearchViewActivity;
 import com.example.trading_android.model.CommoditySort;
 
 import java.util.List;
-
-import static com.example.trading_android.tableView.Fragment2.TAG;
 
 public class CommoditySortAdapter extends BaseAdapter {
     private List<CommoditySort> listData;
@@ -70,10 +66,9 @@ public class CommoditySortAdapter extends BaseAdapter {
             convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                    Log.d(TAG, "onClick: "+"你点击了选项"+listData.get(position).getSortName());//bottom会覆盖item的焦点，所以要在xml里面配置android:focusable="false"
+                    Log.d("xushulng", "onClick: "+"你点击了选项"+listData.get(position).getId());//bottom会覆盖item的焦点，所以要在xml里面配置android:focusable="false"
                     Bundle mBundle = new Bundle();
                     mBundle.putString("id",String.valueOf(listData.get(position).getId()));
-                    mBundle.putString("sortName",String.valueOf(listData.get(position).getSortName()));
                     Intent intent = new Intent(context, SearchCommodityActivity.class);
                     intent.putExtras(mBundle);
                     context.startActivity(intent);

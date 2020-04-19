@@ -35,20 +35,17 @@
             android:iconifiedByDefault="false"
             android:queryHint="@string/home_search"></SearchView>
     </LinearLayout>
-    <Button
-        android:id="@+id/teet"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="cesfa">
-    </Button>
+    <include layout="@layout/include_commodity_screen"/>
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:padding="2dp"
         >
         <RelativeLayout
             android:id="@+id/commodity"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             >
             <com.example.trading_android.view.ExpandableGridView
                 android:id="@+id/gridviewCommmodity"
@@ -60,6 +57,6 @@
                 android:gravity="center"
                 android:background="#33ffffff"/>
         </RelativeLayout>
-    </ScrollView>>
+    </ScrollView>
 </LinearLayout>
 

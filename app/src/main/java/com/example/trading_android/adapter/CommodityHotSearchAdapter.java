@@ -1,7 +1,9 @@
 package com.example.trading_android.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,11 +14,13 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.trading_android.R;
+import com.example.trading_android.activity.CommodityInfoActivity;
+import com.example.trading_android.activity.SearchCommodityActivity;
 import com.example.trading_android.model.Commodity;
 
 import java.util.List;
 
-import static com.example.trading_android.tableView.Fragment2.TAG;
+import static com.example.trading_android.fragment.Fragment2.TAG;
 
 public class CommodityHotSearchAdapter extends BaseAdapter {
     private List<Commodity> listData;
@@ -74,6 +78,13 @@ public class CommodityHotSearchAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "onClick: "+"你点击了选项"+listData.get(position).getName());//bottom会覆盖item的焦点，所以要在xml里面配置android:focusable="false"
+
+                Bundle mBundle = new Bundle();
+                mBundle.putString("id",String.valueOf(listData.get(position).getId()));
+                mBundle.putString("sortName",String.valueOf(listData.get(position).getSubImages()));
+                Intent intent = new Intent(context, CommodityInfoActivity.class);
+                intent.putExtras(mBundle);
+                context.startActivity(intent);
             }
         });
         convertView.setBackgroundColor(Color.WHITE);

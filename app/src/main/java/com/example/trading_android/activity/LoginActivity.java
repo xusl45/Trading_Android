@@ -1,6 +1,8 @@
 package com.example.trading_android.activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -17,7 +19,7 @@ import com.example.trading_android.R;
 import com.example.trading_android.URLpath;
 import com.example.trading_android.util.ServerResponse;
 import com.example.trading_android.model.User;
-import com.example.trading_android.tableView.MainActivity;
+import com.example.trading_android.fragment.MainActivity;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -65,16 +67,26 @@ public class LoginActivity extends AppCompatActivity {
         if(actionBar != null){
             actionBar.hide();
         }
+        accounttext = findViewById(R.id.input_mobile);
+        pwdtext = findViewById(R.id.input_password);
 
+        SharedPreferences sharedPreferences=getSharedPreferences("loginCentent", Context.MODE_PRIVATE);
+        String name=sharedPreferences.getString("name",null);
+        String password=sharedPreferences.getString("password",null);
+        Log.d(TAG,name+password +"xushulong");
+        if (name !=null &&password !=null)
+        {
+            account = name;
+            pwd = password;
+            sendRequestwithOKhttp();
+        }
         buttonLogin = findViewById(R.id.btn_login);
         buttonLogin.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
 
-                accounttext = findViewById(R.id.input_mobile);
                 account = accounttext.getText().toString();
-                pwdtext = findViewById(R.id.input_password);
                 pwd = pwdtext.getText().toString();
                 sendRequestwithOKhttp();
             }
@@ -131,18 +143,31 @@ public class LoginActivity extends AppCompatActivity {
             user = (User) serverResponse.getData();
             message.what = UPDATE_TECT;
             mHandler.sendMessage(message);
+
             String value = String.valueOf(user.getUsername());
             Bundle mBundle = new Bundle();
             mBundle.putString("username",value);
+            //保存登录状态
+            loginCentent();
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
             intent.putExtras(mBundle);
-            Log.d("test12311111111", "许舒隆"+value);
             startActivity(intent);
             finish();
         }else{
             message.what = Tent_TECT;
             mHandler.sendMessage(message);
         }
+    }
+
+    private void loginCentent() {
+        SharedPreferences sharedPreferences = getSharedPreferences("loginCentent", Context.MODE_PRIVATE); //私有数据
+
+        SharedPreferences.Editor editor = sharedPreferences.edit(); //获取编辑器
+
+        editor.putString("name", account);
+        editor.putString("password",pwd);
+        editor.commit();
+
     }
 
 }

@@ -4,15 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.KeyEvent;
-import android.view.View;
-import android.widget.Toast;
 
 import com.example.trading_android.R;
-import com.example.trading_android.activity.LoginActivity;
 import com.example.trading_android.activity.SearchCommodityActivity;
-import com.example.trading_android.tableView.MainActivity;
 
 import scut.carson_ho.searchview.ICallBack;
 import scut.carson_ho.searchview.SearchView;

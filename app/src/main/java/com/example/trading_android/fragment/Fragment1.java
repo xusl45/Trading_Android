@@ -1,6 +1,4 @@
-package com.example.trading_android.tableView;
-
-import com.xuexiang.xui.widget.banner.widget.banner.*;
+package com.example.trading_android.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,12 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.trading_android.R;
-
-import java.util.List;
 
 
 public class Fragment1 extends Fragment {

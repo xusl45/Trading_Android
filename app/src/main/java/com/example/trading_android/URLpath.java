@@ -54,7 +54,7 @@ public class URLpath {
     /**
      * 根据商品id获取商品详情Url
      */
-    public static final String GET_COMMODITY_BY_ID_URL = "/business/queryCommodityInfoById?CommodityId=";
+    public static final String GET_COMMODITY_BY_ID_URL = "/findOneCommodityById";
 
     /**
      * 根据输入的商品名模糊搜索商品列表

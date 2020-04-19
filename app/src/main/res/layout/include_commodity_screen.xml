@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="48dp"
+    android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:gravity="center"
+    android:background="@color/background_dark"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/commodityByOne"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:drawableEnd="@drawable/ic_arrow_drop_down"
+        android:layout_weight="1"
+        android:background="@color/white"
+        android:drawableRight="@drawable/ic_arrow_drop_down"
+        android:gravity="center"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:layout_margin="1dp"
+        android:text="综合排序">
+    </TextView>
+    <TextView
+        android:id="@+id/commodityBysend"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_margin="1dp"
+        android:layout_weight="1"
+        android:background="@color/white"
+        android:gravity="center"
+        android:paddingLeft="16dp"
+        android:paddingRight="14dp"
+        android:text="销量优先"></TextView>
+    <TextView
+        android:id="@+id/commodityChoose"
+        android:layout_height="48dip"
+        android:layout_weight="1"
+        android:background="@color/white"
+        android:drawableEnd="@drawable/ic_arrow_drop_down"
+        android:drawableRight="@drawable/ic_arrow_drop_down"
+        android:gravity="center"
+        android:paddingLeft="16dp"
+        android:paddingRight="14dp"
+        android:layout_margin="1dp"
+        android:text="价格优先"
+        tools:ignore="HardcodedText"
+        android:layout_width="match_parent">
+    </TextView>
+    <android.support.v7.widget.AppCompatImageView
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:background="@color/white"
+        android:paddingTop="10dp"
+        android:paddingBottom="5dp"
+        android:src="@drawable/ic_orientation_grid">
+
+    </android.support.v7.widget.AppCompatImageView>
+
+
+</LinearLayout>

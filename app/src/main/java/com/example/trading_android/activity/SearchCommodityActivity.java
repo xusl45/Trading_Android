@@ -1,7 +1,6 @@
 package com.example.trading_android.activity;
 
 import android.content.Intent;
-import android.nfc.Tag;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -10,8 +9,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.GridView;
 import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.trading_android.R;
@@ -19,15 +18,14 @@ import com.example.trading_android.URLpath;
 import com.example.trading_android.activity.components.SearchViewActivity;
 import com.example.trading_android.adapter.CommodityHotSearchAdapter;
 import com.example.trading_android.model.Commodity;
-import com.example.trading_android.model.CommodityBanner;
-import com.example.trading_android.model.CommoditySort;
-import com.example.trading_android.tableView.MainActivity;
 import com.example.trading_android.util.ServerResponse;
 import com.example.trading_android.view.ExpandableGridView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import okhttp3.FormBody;
@@ -39,9 +37,13 @@ import okhttp3.Response;
 public class SearchCommodityActivity extends AppCompatActivity {
     private  static final int UPDATE_Sort= 1;
     private  static final int UPDATE_Search = 2 ;
+    private  static final int UPDATE_Send = 3 ;
+    private  static final int UPDATE_Price = 4 ;
     public static final String TAG = "SearchCommodity";
+    private TextView textView;
+    private TextView textView1;
+    private TextView textView2;
     private  String name;
-    private Button button;
     private  String id;
     private String sortName;
     private SearchView searchView;
@@ -68,6 +70,32 @@ public class SearchCommodityActivity extends AppCompatActivity {
                     gridViewCommodity.setNumColumns(2);
                     searchView.setQueryHint(name);
                     break;
+                case UPDATE_Send:
+                    Collections.sort(commodities, new Comparator<Commodity>() {
+                        // 按销量排序
+                        @Override
+                        public int compare(Commodity p1, Commodity p2) {
+                            return p1.getSellNum() == p2.getSellNum() ? 0 : (p1.getSellNum() < p2.getSellNum() ? 1 : -1);
+                        }
+
+                    });
+                    hAdapter=new CommodityHotSearchAdapter(commodities, SearchCommodityActivity.this);
+                    gridViewCommodity.setAdapter(hAdapter);
+                    gridViewCommodity.setNumColumns(2);
+                    break;
+                case UPDATE_Price:
+                    Collections.sort(commodities, new Comparator<Commodity>() {
+                        // 按价格排序
+                        @Override
+                        public int compare(Commodity p1, Commodity p2) {
+                            return p1.getMinPrice() == p2.getMinPrice() ? 0 : (p1.getMinPrice() > p2.getMinPrice()? 1 : -1);
+                        }
+
+                    });
+                    hAdapter=new CommodityHotSearchAdapter(commodities, SearchCommodityActivity.this);
+                    gridViewCommodity.setAdapter(hAdapter);
+                    gridViewCommodity.setNumColumns(2);
+                    break;
                 default:
                     break;
             }
@@ -84,20 +112,42 @@ public class SearchCommodityActivity extends AppCompatActivity {
         name = mbundle.getString("name");
         id = mbundle.getString("id");
         sortName = mbundle.getString("sortName");
-        button =(Button)findViewById(R.id.teet);
-        button.setOnClickListener(new View.OnClickListener(){
-
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(SearchCommodityActivity.this,name+"xushulong" +id,Toast.LENGTH_SHORT).show();
-            }
-        });
         gridViewCommodity = (ExpandableGridView) findViewById(R.id.gridviewCommmodity);
         searchView = findViewById(R.id.home_serachview);
         setSearchViewIntent();
 
         initPost();
 
+        textView =(TextView) findViewById(R.id.commodityByOne);
+        textView.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                Message msg=Message.obtain();
+                msg.what=UPDATE_Sort;
+                mHandler.sendMessage(msg);
+            }
+        });
+        textView1 =(TextView) findViewById(R.id.commodityBysend);
+        textView1.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                Message msg=Message.obtain();
+                msg.what=UPDATE_Send;
+                mHandler.sendMessage(msg);
+            }
+        });
+        textView2 =(TextView) findViewById(R.id.commodityChoose);
+        textView2.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                Message msg=Message.obtain();
+                msg.what=UPDATE_Price;
+                mHandler.sendMessage(msg);
+            }
+        });
         ActionBar actionBar = getSupportActionBar();
         if(actionBar != null){
             actionBar.hide();
