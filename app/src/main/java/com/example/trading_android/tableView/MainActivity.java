@@ -1,4 +1,4 @@
-package com.example.trading_android.tableView;
+package com.example.trading_android.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;

@@ -16,7 +16,7 @@ import com.example.trading_android.model.Commodity;
 
 import java.util.List;
 
-import static com.example.trading_android.tableView.Fragment2.TAG;
+import static com.example.trading_android.fragment.Fragment2.TAG;
 
 public class CommodityHotSearchAdapter extends BaseAdapter {
     private List<Commodity> listData;

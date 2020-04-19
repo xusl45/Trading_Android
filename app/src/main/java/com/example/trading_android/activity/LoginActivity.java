@@ -17,7 +17,7 @@ import com.example.trading_android.R;
 import com.example.trading_android.URLpath;
 import com.example.trading_android.util.ServerResponse;
 import com.example.trading_android.model.User;
-import com.example.trading_android.tableView.MainActivity;
+import com.example.trading_android.fragment.MainActivity;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 

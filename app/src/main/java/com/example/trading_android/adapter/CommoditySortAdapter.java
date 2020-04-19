@@ -20,7 +20,7 @@ import com.example.trading_android.model.CommoditySort;
 
 import java.util.List;
 
-import static com.example.trading_android.tableView.Fragment2.TAG;
+import static com.example.trading_android.fragment.Fragment2.TAG;
 
 public class CommoditySortAdapter extends BaseAdapter {
     private List<CommoditySort> listData;

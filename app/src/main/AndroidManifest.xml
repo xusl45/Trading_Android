@@ -17,7 +17,7 @@
         android:networkSecurityConfig="@xml/network_security_config"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".tableView.MainActivity">
+        <activity android:name=".fragment.MainActivity">
         </activity>
         <activity android:name=".activity.components.SearchViewActivity"/>
         <activity android:name=".activity.LoginActivity">
