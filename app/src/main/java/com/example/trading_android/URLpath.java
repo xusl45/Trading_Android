@@ -55,16 +55,23 @@ public class URLpath {
      * 根据商品id获取商品详情Url
      */
     public static final String GET_COMMODITY_BY_ID_URL = "/findOneCommodityById";
-
+    /**
+     * 根据商品id获取对应类别
+     */
+    public static final String GET_COMMODITYSORT_BY_ID_URL = "/findCommoditySortById";
+    /**
+     * 根据商品id获取商品预售信息
+     */
+    public static final String GET_COMMODITYSTORAGE_BY_ID_URL = "/showALLCommoditySizeById";
     /**
      * 根据输入的商品名模糊搜索商品列表
      */
     public static final String GET_COMMODITY_BY_NAME_URL = "/business/queryCommodityInfoByName?CommodityName=";
 
     /**
-     * 添加进购物车Url
+     * 增加挂售商品尺码 价格 用户id
      */
-    public static final String POST_ADD_TO_CART_URL = "/business/addToCart";
+    public static final String POST_ADD_TO_COMMODITYSTORAGE_URL = "/insertCommoditySize";
 
     /**
      * 购买Url

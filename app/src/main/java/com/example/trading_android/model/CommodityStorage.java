@@ -10,7 +10,7 @@ public class CommodityStorage {
     private float size;//鞋码
     private Date sellTime;//出售时间
     private int commodityID;//商品id
-    private String orderNumber;
+    private String orderNumber;//订单编号
     private Commodity commodity;//商品的详细信息
 
     @Override

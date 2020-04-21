@@ -38,6 +38,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:scrollbars="none"
         >
         <LinearLayout
             android:layout_width="match_parent"
@@ -103,8 +104,7 @@
             <RelativeLayout
                 android:id="@+id/commodity"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-               >
+                android:layout_height="match_parent">
 
                 <com.example.trading_android.view.ExpandableGridView
                     android:id="@+id/gridviewCommmodity"

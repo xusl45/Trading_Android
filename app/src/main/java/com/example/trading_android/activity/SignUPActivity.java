@@ -38,7 +38,7 @@ public class SignUPActivity extends AppCompatActivity {
     private String pwd;
     private EditText Npwdtext;         //输入确认密码框的信息
     private String Npwd;
-    private ServerResponse serverResponse;
+    private ServerResponse<Boolean> serverResponse;
     private  User user;
 
 
@@ -127,7 +127,7 @@ public class SignUPActivity extends AppCompatActivity {
                     Response response =client.newCall(request).execute();
                     String  responsedate = response.body().string();
                     Gson gson = new  Gson();
-                    serverResponse = gson.fromJson(responsedate,new TypeToken<ServerResponse>(){}.getType());
+                    serverResponse = gson.fromJson(responsedate,new TypeToken<ServerResponse<Boolean>>(){}.getType());
                     Log.d(TAG ,serverResponse.toString());
                     Message message = new Message();
                     if(serverResponse.getStatu() ==200){

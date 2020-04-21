@@ -39,6 +39,7 @@ public class LoginActivity extends AppCompatActivity {
     private String account;//账号
     private EditText pwdtext;         //输入密码框的信息
     private String pwd;//密码
+    private String uid;
     private ServerResponse<User> serverResponse;
     private  User user;
 
@@ -99,7 +100,6 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(LoginActivity.this, SignUPActivity.class);
                 startActivity(intent);
-                sendRequestwithOKhttp();
 
             }
         });
@@ -143,6 +143,7 @@ public class LoginActivity extends AppCompatActivity {
             user = (User) serverResponse.getData();
             message.what = UPDATE_TECT;
             mHandler.sendMessage(message);
+            uid = String.valueOf(user.getId());
 
             String value = String.valueOf(user.getUsername());
             Bundle mBundle = new Bundle();
@@ -163,7 +164,7 @@ public class LoginActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("loginCentent", Context.MODE_PRIVATE); //私有数据
 
         SharedPreferences.Editor editor = sharedPreferences.edit(); //获取编辑器
-
+        editor.putString("uid",uid);
         editor.putString("name", account);
         editor.putString("password",pwd);
         editor.commit();

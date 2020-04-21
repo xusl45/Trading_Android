@@ -54,11 +54,12 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:scrollbars="none"
         android:layout_weight="1">
-        <LinearLayout android:layout_height="match_parent"
+        <LinearLayout
+            android:layout_height="match_parent"
             android:layout_width="match_parent"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
             <LinearLayout
                 android:id="@+id/commodity_page"
                 android:layout_width="match_parent"
@@ -68,7 +69,7 @@
                 <com.zhouwei.mzbanner.MZBannerView
                     android:id="@+id/commodityBanner"
                     android:layout_width="wrap_content"
-                    android:layout_height="250dp"
+                    android:layout_height="300dp"
                     android:adjustViewBounds="true"
                     android:scaleType="fitXY"
                     android:layout_gravity="center"
@@ -108,11 +109,13 @@
                     android:background="#F5F5F5" />
 
                 <LinearLayout
+                    android:id="@+id/showCommodity"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
                     <TextView
+                        android:id="@+id/choseButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
@@ -189,6 +192,251 @@
                 android:layout_width="match_parent"
                 android:layout_height="10dp"
                 android:background="#F5F5F5" />
+            <!--其他信息-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="#dedede" />
+
+                <TextView
+                    android:id="@+id/tv_after_sale"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center|start"
+                    android:padding="13dp"
+                    android:text="售后：狗窝app售后处理团队"
+                    android:textColor="#999999"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tv_ship_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center|start"
+                    android:padding="13dp"
+                    android:text="发货：顺丰直达"
+                    android:textColor="#999999"
+                    android:textSize="14sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="#dedede" />
+
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="#F5F5F5" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="20dp"
+                    android:paddingTop="18dp"
+                    android:text="商品介绍"
+                    android:textColor="@color/black"
+                    android:textSize="20dp">
+
+                </TextView>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="10dp">
+
+                    <TextView
+                        android:id="@+id/commodityDetail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingRight="20dp"
+                        android:paddingLeft="20dp"
+                        android:text="诞生于1982年的NIKE Air Force 1一直都深受篮球、街头文化、潮人、音乐、学生、白领等各界人士的喜爱，经典的复古板鞋造型，无论搭配任何风格的衣服都一样好看，EVA缓震中底配和后掌Air气垫使得这款鞋拥有相当不错的缓震性能和舒适感。"
+                        android:textColor="#999999"
+                        android:textSize="16dp"></TextView>
+                </LinearLayout>
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="#F5F5F5" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="20dp"
+                        android:paddingTop="18dp"
+                        android:text="参数"
+                        android:textColor="@color/black"
+                        android:textSize="20dp"
+                        >
+                    </TextView>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="5dp"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_weight="1"
+                            android:paddingLeft="20dp"
+                            android:text="所属系列"
+                            android:textSize="16dp"
+                            android:textColor="#999999"></TextView>
+
+                        <TextView
+                            android:id="@+id/sortName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:paddingRight="20dp"
+                            android:text="AIRJordan"
+                            android:gravity="right"
+                            android:textColor="#999999"
+                            android:textSize="16dp"></TextView>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="5dp"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_weight="1"
+                            android:paddingLeft="20dp"
+                            android:text="货号"
+                            android:textSize="16dp"
+                            android:textColor="#999999"></TextView>
+                        <TextView
+                            android:id="@+id/commodityType"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:paddingRight="20dp"
+                            android:text="TEST-123"
+                            android:gravity="right"
+                            android:textColor="#999999"
+                            android:textSize="16dp"></TextView>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="5dp"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_weight="1"
+                            android:paddingLeft="20dp"
+                            android:text="发售价格"
+                            android:textSize="16dp"
+                            android:textColor="#999999"></TextView>
+
+                        <TextView
+                            android:id="@+id/sendPrice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:paddingRight="20dp"
+                            android:text="12333"
+                            android:gravity="right"
+                            android:textColor="#999999"
+                            android:textSize="16dp"></TextView>
+                    </LinearLayout>
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="#F5F5F5" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="20dp"
+                    android:paddingTop="18dp"
+                    android:text="商品细节"
+                    android:textColor="@color/black"
+                    android:textSize="20dp">
+
+                </TextView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:paddingTop="5dp">
+
+                    <com.example.trading_android.view.ExpandableListView
+                        android:id="@+id/images_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/person_sun_back"
+                        android:divider="@color/person_back"
+                        android:dividerHeight="2dp" />
+                </LinearLayout>
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="#F5F5F5" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="20dp"
+                    android:paddingTop="18dp"
+                    android:text="球鞋尺码"
+                    android:textColor="@color/black"
+                    android:textSize="20dp">
+
+                </TextView>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="10dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingRight="20dp"
+                        android:paddingLeft="20dp"
+                        android:src="@drawable/shoe_size"
+                        android:textColor="#999999"
+                        android:textSize="16dp"></ImageView>
+                </LinearLayout>
+            </LinearLayout>
         </LinearLayout>>
     </ScrollView>
 
@@ -220,17 +468,19 @@
             android:id="@+id/layout_shopping_cart"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="7"
+            android:layout_weight="10"
             android:background="@drawable/view_selector"
             android:gravity="center">
 
-            <ImageView
-                android:id="@+id/img_shopping_cart"
+            <TextView
+                android:id="@+id/commodity_sell"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@null"
                 android:padding="7dp"
-                android:src="@mipmap/detail_car" />
+                android:gravity="center"
+                android:text="出售"
+                 />
 
         </LinearLayout>
 
@@ -238,7 +488,7 @@
             android:id="@+id/btn_add_shopping_cart"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="19"
+            android:layout_weight="12"
             android:background="@color/blue"
             android:gravity="center"
             android:text="立即购买"

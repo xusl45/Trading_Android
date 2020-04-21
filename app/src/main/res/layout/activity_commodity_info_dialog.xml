@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/dialog_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:id="@+id/goods_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+       >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="120dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical"
+                android:paddingLeft="126dp"
+                android:background="@color/white">
+
+                <TextView
+                    android:id="@+id/dialog_goods_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="20dp"
+                    android:maxLines="2"
+                    android:ellipsize="end"
+                    android:text="AJ1 黑曜石"
+                    android:textSize="16dp"
+                    android:textColor="@color/txt_color_tint"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:paddingRight="14dp">
+
+                    <TextView
+                        android:id="@+id/dialog_goods_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="￥8888.00"
+                        android:textSize="14dp"
+                        android:textColor="@color/txt_color_deep"/>
+
+                    <TextView
+                        android:id="@+id/goods_type"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:text=""
+                        android:visibility="gone"
+                        android:textSize="12sp"
+                        android:textColor="@color/txt_click_color"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/custom_dialog_close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:padding="14dp"
+                android:layout_marginTop="20dp">
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:background="@mipmap/close"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="14dp"
+                android:padding="1dp"
+                android:background="@drawable/cme_dialog_item_style">
+                <ImageView
+                    android:id="@+id/dialog_img"
+                    android:layout_width="88dp"
+                    android:layout_height="88dp"
+                    android:background="@mipmap/no_image"/>
+            </RelativeLayout>
+        </RelativeLayout>
+        <RelativeLayout android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:background="#F5F5F5">
+            <GridView
+                android:id="@+id/gridviewDialog"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="3dp"
+                android:numColumns="auto_fit"
+                android:horizontalSpacing="2dp"
+                android:verticalSpacing="2dp"
+                android:stretchMode="columnWidth"
+                android:gravity="center"
+                android:background="#33ffffff">
+            </GridView>
+        </RelativeLayout>
+    </LinearLayout>
+
+
+</RelativeLayout>

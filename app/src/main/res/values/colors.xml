@@ -29,7 +29,14 @@
     <color name="culm_color">#331dece5</color>
     <color name="first_FAB">#07c8d6</color>
 
-
+    <color name="mSwipeLayout">#cccccc</color>
+    <color name="txt_color_tint">#a1a1a1</color>
+    <color name="txt_color_tint_">#939393</color>
+    <color name="txt_color_deep">#535353</color>
+    <color name="view_color_tint">#f8f8f8</color>
+    <color name="background_color">#f7f7f7</color>
+    <color name="txt_click_color">#6bc564</color>
+    <color name="class_background">#3aaaaaaa</color>
 
     <color name="light_grey">#EAEAEA</color>
     <!--登录页面相关-->

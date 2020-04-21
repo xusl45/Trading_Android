@@ -15,7 +15,6 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.trading_android.R;
 import com.example.trading_android.activity.CommodityInfoActivity;
-import com.example.trading_android.activity.SearchCommodityActivity;
 import com.example.trading_android.model.Commodity;
 
 import java.util.List;

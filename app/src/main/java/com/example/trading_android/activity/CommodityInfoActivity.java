@@ -8,27 +8,51 @@ import android.os.Message;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Display;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.trading_android.R;
 import com.example.trading_android.URLpath;
 import com.example.trading_android.adapter.CommodityHotSearchAdapter;
+import com.example.trading_android.adapter.CommodityInfoDetailAdapter;
+import com.example.trading_android.adapter.CommoditySortAdapter;
+import com.example.trading_android.adapter.CommodityStorageAdapter;
 import com.example.trading_android.fragment.Fragment2;
 import com.example.trading_android.model.Commodity;
 import com.example.trading_android.model.CommodityBanner;
+import com.example.trading_android.model.CommoditySort;
 import com.example.trading_android.model.CommodityStorage;
+import com.example.trading_android.model.ShowImages;
+import com.example.trading_android.model.User;
 import com.example.trading_android.util.ServerResponse;
+import com.example.trading_android.view.CustomDialog;
+import com.example.trading_android.view.ExpandableListView;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.zhouwei.mzbanner.MZBannerView;
 import com.zhouwei.mzbanner.holder.MZHolderCreator;
 import com.zhouwei.mzbanner.holder.MZViewHolder;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -43,16 +67,28 @@ import okhttp3.Response;
 
 public class CommodityInfoActivity extends AppCompatActivity {
     private static final String TAG = "CommodityINFOctivity";
+    private  static final int UPDATE_Commodity= 1;
+    private final int  UPDATE_Size= 2;
+    private  static final int UPDATE_Parameter= 3;
+
     private MZBannerView mMZBanner;
     private ImageView imageBACK;
-    private TextView commodityName;
-    private TextView commodityPrice;
-    private  static final int UPDATE_Commodity= 1;
-    private  String id;
-    private  String[] pictures ;
+    private TextView commodityName,commodityPrice,choseButton,dialog_goods_price;
+    private TextView sortName,commodityType,sendPrice,commodityDetail,commoditySell;
+    private CustomDialog dialog;
+    private LinearLayout showCommodity;
+    private ListView listView;
+    private String id ,commodityStorageID;
+    private String[] pictures ;
+    private List<ShowImages> listPictures = new ArrayList<>();
     private Commodity commodities;
-    private List<CommodityStorage> commodityStorages = new ArrayList<>();
+    private CommoditySort commoditiesSort;
+    private List<CommodityStorage> commodityStorages ;
     private ServerResponse<Commodity> serverResponseCommodity;
+    private ServerResponse<CommoditySort> serverResponseCommoditySort;
+    private ServerResponse<List<CommodityStorage>> serverResponseCommodityStorage;
+    private ImageView dialog_img;
+
 
 
     private Handler mHandler = new Handler(){
@@ -63,11 +99,30 @@ public class CommodityInfoActivity extends AppCompatActivity {
                     pictures = commodities.getSubImages().split(";");
                     for(String test  :pictures)
                     {
-                        Log.d(TAG ,test);
+                        Log.d(TAG,test);
+                        listPictures.add(new  ShowImages(test));
+                    }
+                    for(int i =0;i<listPictures.size();i++)
+                    {
+                        Log.d(TAG,listPictures.get(i).getImage());
                     }
                     initView();
                     commodityName.setText(commodities.getName());
                     commodityPrice.setText("￥"+commodities.getMinPrice());
+                    CommodityInfoDetailAdapter Ladapter =  new CommodityInfoDetailAdapter(listPictures,CommodityInfoActivity.this);
+                    listView = (ListView) findViewById(R.id.images_list);
+                    listView.setAdapter(Ladapter);
+                    break;
+                case UPDATE_Size:
+                    Bundle bundle = (Bundle) msg.obj;
+//                    Log.d(TAG,commodityStorageID);
+                    choseButton.setText("已选：" +bundle.getString("str"));
+                    break;
+                case UPDATE_Parameter:
+                    sortName.setText(commoditiesSort.getSortName());
+                    sendPrice.setText(String.valueOf(commodities.getSendPrice()));
+                    commodityType.setText(commodities.getType());
+                    commodityDetail.setText(commodities.getDetail());
                     break;
                 default:
                     break;
@@ -88,10 +143,6 @@ public class CommodityInfoActivity extends AppCompatActivity {
         id = mbundle.getString("id");
         initViewID();
         initPost();
-    }
-
-    private void initViewID() {
-        imageBACK= findViewById(R.id.imageBack);
         imageBACK.setOnClickListener(new View.OnClickListener(){
 
             @Override
@@ -99,15 +150,167 @@ public class CommodityInfoActivity extends AppCompatActivity {
                 finish();
             }
         });
+        showCommodity.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                if (commodityStorages != null) {
+                    Dialog();
+                }else {
+                    Toast.makeText(CommodityInfoActivity.this ,"无预售商品及尺码",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        commoditySell.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                Bundle mBundle = new Bundle();
+                mBundle.putString("id",id);
+                Intent intent = new Intent(CommodityInfoActivity.this, CommoditySellActivity.class);
+                intent.putExtras(mBundle);
+                startActivity(intent);
+            }
+        });
+    }
+    //选择尺码的弹窗
+    private void Dialog() {
+        dialog = new CustomDialog(CommodityInfoActivity.this,R.style.Dialog);//设置dialog的样式
+        Window window = dialog.getWindow();
+        window.setGravity(Gravity.BOTTOM);
+        window.setWindowAnimations(R.style.mystyle); // 添加动画
+        dialog.show();
+        DisplayMetrics dm = new DisplayMetrics();
+        this.getWindowManager().getDefaultDisplay().getMetrics(dm);
+
+        WindowManager.LayoutParams lp = window.getAttributes();
+        //这句就是设置dialog横向满屏了。
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.height = (int) (dm.heightPixels*0.7);     //dialog屏幕占比
+        window.setAttributes(lp);
+
+        GridView dialog_gridView = (GridView) dialog.findViewById(R.id.gridviewDialog);
+        RelativeLayout custom_dialog_close = (RelativeLayout) dialog.findViewById(R.id.custom_dialog_close);
+        TextView dialog_goods_name = (TextView) dialog.findViewById(R.id.dialog_goods_name);
+        dialog_img = (ImageView) dialog.findViewById(R.id.dialog_img);
+        dialog_goods_price = (TextView) dialog.findViewById(R.id.dialog_goods_price);
+        //涉资dialog里面内容
+        custom_dialog_close.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+        dialog_goods_name.setText(commodities.getName());
+        dialog_goods_price.setText("￥"+String.valueOf(commodities.getMinPrice()));
+        Glide.with(this)
+                .load(commodities.getMainImage())
+                .into(dialog_img );
+
+        //adater
+         CommodityStorageAdapter mAdapter=new CommodityStorageAdapter(commodityStorages,CommodityInfoActivity.this);
+        dialog_gridView.setAdapter(mAdapter);
+        dialog_gridView.setNumColumns(4);
+        dialog_gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.d(TAG,"XUSHULONG " +position);
+                commodityStorageID = String.valueOf(commodityStorages.get(position).getId());
+                PayMent(String.valueOf(commodityStorages.get(position).getSize()));
+                dialog.dismiss();
+            }
+        });
+    }
+    public void PayMent(String str){
+        Message msg=Message.obtain();
+        Bundle bundle = new Bundle();
+        bundle.putString("str",str);
+        msg.obj =bundle;
+        msg.what=UPDATE_Size;
+        mHandler.sendMessage(msg);
+
+    }
+    //绑定组件
+    private void initViewID() {
+        imageBACK= findViewById(R.id.imageBack);
         commodityName= findViewById(R.id.commodityInfoName);
         commodityPrice = findViewById(R.id.commodityInfoPrice);
+        showCommodity = (LinearLayout) findViewById(R.id.showCommodity);
+        choseButton  = findViewById(R.id.choseButton);
+        sortName = findViewById(R.id.sortName);
+        commodityType = findViewById(R.id.commodityType);
+        sendPrice = findViewById(R.id.sendPrice);
+        commodityDetail = findViewById(R.id.commodityDetail);
+        commoditySell = findViewById(R.id.commodity_sell);
     }
-
+    //获取信息
     private void initPost() {
         getCommodity();
-//        getCommodityStore();
+        getCommodityStore();
+        getCommodityParameter();
+    }
+    //获取商品参数
+    private void getCommodityParameter() {
+        final String urlFindMessage = URLpath.BASE_URL+URLpath.GET_COMMODITYSORT_BY_ID_URL;
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    OkHttpClient client = new OkHttpClient();
+                    RequestBody requestBody = new FormBody.Builder()
+                            .add("id",id)
+                            .build();
+                    Request request = new Request.Builder()
+                            .url(urlFindMessage)
+                            .post(requestBody)
+                            .build();
+                    Response response = client.newCall(request).execute();
+                    String responsedate = response.body().string();
+                    Gson gson = new  Gson();
+                    serverResponseCommoditySort = gson.fromJson(responsedate,new TypeToken<ServerResponse<CommoditySort>>(){}.getType());
+                    commoditiesSort = (CommoditySort) serverResponseCommoditySort.getData();
+                    Log.d(TAG,commoditiesSort.toString());
+                    Message msg=Message.obtain();
+                    msg.what=UPDATE_Parameter;
+                    mHandler.sendMessage(msg);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
     }
 
+    //商品预售
+    private void getCommodityStore() {
+        final String urlFindMessage = URLpath.BASE_URL+URLpath.GET_COMMODITYSTORAGE_BY_ID_URL;
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    OkHttpClient client = new OkHttpClient();
+                    RequestBody requestBody = new FormBody.Builder()
+                            .add("commodityId",id)
+                            .build();
+                    Request request = new Request.Builder()
+                            .url(urlFindMessage)
+                            .post(requestBody)
+                            .build();
+                    Response response = client.newCall(request).execute();
+                    String responsedate = response.body().string();
+                    Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+                    serverResponseCommodityStorage = gson.fromJson(responsedate,new TypeToken<ServerResponse<List<CommodityStorage>>>(){}.getType());
+                    commodityStorages = (List<CommodityStorage>) serverResponseCommodityStorage.getData();
+                    for (CommodityStorage commodityStorage :commodityStorages){
+                        Log.d(TAG,commodityStorage.toString());
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
+    //商品
     private void getCommodity() {
         final String urlFindMessage = URLpath.BASE_URL+URLpath.GET_COMMODITY_BY_ID_URL;
         new Thread(new Runnable() {
@@ -127,7 +330,7 @@ public class CommodityInfoActivity extends AppCompatActivity {
                     Gson gson = new  Gson();
                     serverResponseCommodity = gson.fromJson(responsedate,new TypeToken<ServerResponse<Commodity>>(){}.getType());
                     commodities = (Commodity) serverResponseCommodity.getData();
-                        Log.d(TAG,commodities.toString());
+//                        Log.d(TAG,commodities.toString());
                     Message msg=Message.obtain();
                     msg.what=UPDATE_Commodity;
                     mHandler.sendMessage(msg);

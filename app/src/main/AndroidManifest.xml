@@ -30,6 +30,7 @@
         <activity android:name=".activity.SignUPActivity"></activity>
         <activity android:name=".activity.SearchCommodityActivity"/>
         <activity android:name=".activity.CommodityInfoActivity"/>
+        <activity android:name=".activity.CommoditySellActivity"/>
     </application>
 
 </manifest>

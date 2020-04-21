@@ -46,5 +46,7 @@ dependencies {
     implementation 'com.carson_ho:SearchLayout:1.0.1'
     //ImageLoader控件
     implementation 'com.nostra13.universalimageloader:universal-image-loader:1.9.3'
+    //选择器
+    implementation  'com.github.addappcn:android-pickers:2.0.0'
     
 }
