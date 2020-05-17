@@ -31,6 +31,8 @@ import com.example.trading_android.view.ExpandableGridView;
 import com.example.trading_android.util.ServerResponse;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.zhouwei.mzbanner.MZBannerView;
 import com.zhouwei.mzbanner.holder.MZHolderCreator;
 import com.zhouwei.mzbanner.holder.MZViewHolder;
@@ -50,6 +52,7 @@ public class Fragment2 extends Fragment {
     private static final int UPDATE_BANNER= 2;
     private static final int UPDATE_Search= 3;
     public static final String TAG = "MZModeBannerFragment";
+    private RefreshLayout refreshLayout;
     private MZBannerView mMZBanner;
     private SearchView searchView;
     private ServerResponse<List<CommoditySort>> serverResponse;
@@ -100,29 +103,25 @@ public class Fragment2 extends Fragment {
         View view = inflater.inflate(R.layout.fragment_item2, null);
         gridView = (GridView) view.findViewById(R.id.gridview);
         gridViewCommodity = (ExpandableGridView) view.findViewById(R.id.gridviewCommmodity);
-//        // 刷新监听。
-//        mRefreshLayout.setOnRefreshListener(mRefreshListener);
+        refreshLayout = view.findViewById(R.id.refresh_homepage);
+        initPost();
+        refreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(RefreshLayout refreshlayout) {
+                refreshlayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
+                initPost();
+            }
+        });
+        searchView =  view.findViewById(R.id.home_serachview);
+        setSearchViewIntent();
         return view;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        searchView = getActivity().findViewById(R.id.home_serachview);
-        setSearchViewIntent();
-        initPost();
     }
 
-//    /**
-//     * 刷新
-//     */
-//    private SwipeRefreshLayout.OnRefreshListener mRefreshListener = new SwipeRefreshLayout.OnRefreshListener() {
-//        @Override
-//        public void onRefresh() {
-//            //获取分类
-//            initPost();
-//        }
-//    };
 
     private void initPost() {
         getBanners();
@@ -308,8 +307,8 @@ public class Fragment2 extends Fragment {
                     searchView.clearFocus();
                 else {
                     Intent intent = new Intent(getActivity(), SearchViewActivity.class);
-                    startActivityForResult(intent, 1);
-//                    startActivity(intent);
+//                    startActivityForResult(intent, 2);
+                    startActivity(intent);
                 }
             }
         });

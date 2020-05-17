@@ -48,5 +48,10 @@ dependencies {
     implementation 'com.nostra13.universalimageloader:universal-image-loader:1.9.3'
     //选择器
     implementation  'com.github.addappcn:android-pickers:2.0.0'
+    //下拉刷新
+    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.2'
+
+    //图片选择
+    implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.2.3'
     
 }

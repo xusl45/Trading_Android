@@ -6,6 +6,7 @@ import java.util.Date;
 
 public class UserMessage {
     private int id;
+    private int uid;
     private String email;//邮箱
     private String nickName;
     private String sex;//性别
@@ -13,6 +14,7 @@ public class UserMessage {
     private String sellNum;//出售数量
     private String buyNum;//购买数量
     private String img;//头像
+    private float remainSum;//余额
     private String age;//居住地
     private Date bornTime;//注册时间
 
@@ -20,8 +22,13 @@ public class UserMessage {
     {
     }
 
-    public UserMessage(int id, String email, String nickName, String sex, String introduce, String img, String age) {
-        this.id = id;
+    public UserMessage(int uid, float remainSum) {
+        this.uid = uid;
+        this.remainSum = remainSum;
+    }
+
+    public UserMessage(int uid, String email, String nickName, String sex, String introduce, String img, String age) {
+        this.uid = uid;
         this.email = email;
         this.nickName = nickName;
         this.sex = sex;
@@ -30,8 +37,8 @@ public class UserMessage {
         this.age = age;
     }
 
-    public UserMessage(int id, String email, String nickName, String sex, String introduce, String sellNum, String buyNum, String img, String age) {
-        this.id = id;
+    public UserMessage(int uid, String email, String nickName, String sex, String introduce, String sellNum, String buyNum, String img, String age) {
+        this.uid = id;
         this.email = email;
         this.nickName = nickName;
         this.sex = sex;
@@ -56,6 +63,23 @@ public class UserMessage {
                 ", age='" + age + '\'' +
                 ", bornTime=" + bornTime +
                 '}';
+    }
+
+
+    public float getRemainSum() {
+        return remainSum;
+    }
+
+    public int getUid() {
+        return uid;
+    }
+
+    public void setUid(int uid) {
+        this.uid = uid;
+    }
+
+    public void setRemainSum(float remainSum) {
+        this.remainSum = remainSum;
     }
 
     public String getAge() {

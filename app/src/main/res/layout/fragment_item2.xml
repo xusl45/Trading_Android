@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/first_head_title_color">
-
     <LinearLayout
         android:id="@+id/title"
         android:layout_width="match_parent"
@@ -35,90 +34,97 @@
             android:iconifiedByDefault="false"
             android:queryHint="@string/home_search"></SearchView>
     </LinearLayout>
-    <ScrollView
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/refresh_homepage"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbars="none"
-        >
-        <LinearLayout
+        android:layout_height="match_parent">
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
-            <RelativeLayout
-            android:id="@+id/home_page"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-                <com.zhouwei.mzbanner.MZBannerView
-                    android:id="@+id/banner"
-                    android:layout_width="match_parent"
-                    android:layout_height="160dp"
-                    app:open_mz_mode="false"
-                    app:canLoop="true"
-                    app:indicatorAlign="center"
-                    app:indicatorPaddingLeft="10dp"
-                    />
-            </RelativeLayout>
-            <RelativeLayout
-                android:id="@+id/product"
+            android:scrollbars="none"
+            >
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:background="#FFFFFF"
-                android:orientation="vertical"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp">
-
-
-                <GridView
-                    android:id="@+id/gridview"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <RelativeLayout
+                android:id="@+id/home_page"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                    <com.zhouwei.mzbanner.MZBannerView
+                        android:id="@+id/banner"
+                        android:layout_width="match_parent"
+                        android:layout_height="160dp"
+                        app:open_mz_mode="false"
+                        app:canLoop="true"
+                        app:indicatorAlign="center"
+                        app:indicatorPaddingLeft="10dp"
+                        />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/product"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:numColumns="auto_fit" >
-                </GridView>
+                    android:layout_height="150dp"
+                    android:background="#FFFFFF"
+                    android:orientation="vertical"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp">
 
-            </RelativeLayout>
-            <RelativeLayout
-                android:id="@+id/hotlayout"
-                android:layout_width="match_parent"
-                android:layout_height="35dp"
-                android:layout_below="@+id/banner_layout"
-                android:layout_alignParentStart="true">
 
-                <ImageView
-                    android:layout_width="50px"
-                    android:layout_height="50px"
-                    android:layout_centerVertical="true"
-                    android:layout_toLeftOf="@+id/hot_title"
-                    android:src="@drawable/home53" />
+                    <GridView
+                        android:id="@+id/gridview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:numColumns="auto_fit" >
+                    </GridView>
 
-                <TextView
-                    android:id="@+id/hot_title"
-                    android:layout_width="200px"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:paddingLeft="5dp"
-                    android:text="热销产品"
-                    android:textColor="#FF4040"
-                    android:textSize="45px" />
-            </RelativeLayout>
-            <RelativeLayout
-                android:id="@+id/commodity"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <com.example.trading_android.view.ExpandableGridView
-                    android:id="@+id/gridviewCommmodity"
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/hotlayout"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:horizontalSpacing="3dp"
-                    android:verticalSpacing="3dp"
-                    android:stretchMode="columnWidth"
-                    android:gravity="center"
-                    android:background="#33ffffff"/>
-            </RelativeLayout>
-        </LinearLayout>
+                    android:layout_height="35dp"
+                    android:layout_below="@+id/banner_layout"
+                    android:layout_alignParentStart="true">
 
-    </ScrollView>
+                    <ImageView
+                        android:layout_width="50px"
+                        android:layout_height="50px"
+                        android:layout_centerVertical="true"
+                        android:layout_toLeftOf="@+id/hot_title"
+                        android:src="@drawable/home53" />
+
+                    <TextView
+                        android:id="@+id/hot_title"
+                        android:layout_width="200px"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:paddingLeft="5dp"
+                        android:text="热销产品"
+                        android:textColor="#FF4040"
+                        android:textSize="45px" />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/commodity"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <com.example.trading_android.view.ExpandableGridView
+                        android:id="@+id/gridviewCommmodity"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:horizontalSpacing="3dp"
+                        android:verticalSpacing="3dp"
+                        android:stretchMode="columnWidth"
+                        android:gravity="center"
+                        android:background="#33ffffff"/>
+                </RelativeLayout>
+            </LinearLayout>
+
+        </ScrollView>
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
 
 
 </LinearLayout>

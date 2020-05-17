@@ -3,17 +3,66 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
+    android:background="@color/first_head_title_color"
     android:layout_height="match_parent">
+    <RelativeLayout
+        android:id="@+id/first_head"
+        android:layout_width="match_parent"
+        android:background="@color/blue"
+        android:layout_height="100dp">
 
-    <TextView
-            android:id="@+id/radius_tv"
+        <com.example.trading_android.view.CircleImageView
+            android:id="@+id/first_img"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/shoe"
+            app:civ_border_color="@color/bottom_icon_up"
+            app:civ_border_width="2dp" />
+        <LinearLayout
             android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@id/first_img"
+            android:orientation="vertical"
+            >
+            <TextView
+                android:id="@+id/first_head_nickname"
+                android:layout_width="170dp"
+                android:layout_height="60dp"
+                android:textSize="25dp"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:layout_marginTop="10dp"
+                android:text="狗窝社区"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="金窝银窝，不如自己的狗窝"
+                android:textColor="@color/white"
+                android:textSize="16dp" />
+        </LinearLayout>
+
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="#F5F5F5" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <GridView
+            android:id="@+id/gridSortView"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="许舒隆最帅了"/>
-    <Button
-        android:id="@+id/buttomView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="test3"></Button>
+            android:numColumns="auto_fit"
+            android:horizontalSpacing="5dp"
+            android:verticalSpacing="5dp"
+            android:stretchMode="columnWidth"
+            android:gravity="center"
+            android:background="#33ffffff">
+        </GridView>
+    </LinearLayout>
 
 </LinearLayout>

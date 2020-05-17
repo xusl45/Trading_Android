@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.RECORD_AUDIO"></uses-permission>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -31,6 +32,31 @@
         <activity android:name=".activity.SearchCommodityActivity"/>
         <activity android:name=".activity.CommodityInfoActivity"/>
         <activity android:name=".activity.CommoditySellActivity"/>
+        <activity android:name=".activity.PersonMessageActivity"/>
+        <activity android:name=".activity.PersonAddressActivity"/>
+        <activity android:name=".activity.PersonAddressChangeActivity"/>
+        <activity android:name=".activity.UserMessageChangeActivity"/>
+        <activity android:name=".activity.UserMessageActivity"/>
+        <activity android:name=".activity.CommodityBuyACtivity"/>
+        <activity android:name=".activity.PersonCommodityBuyActivity"/>
+        <activity android:name=".activity.PersonCommoditySellActivity"/>
+        <activity android:name=".activity.PersonCommodityBuyedInfoActivity"/>
+        <activity android:name=".activity.PersonCommoditySellInfoActivity"/>
+        <activity android:name=".activity.PersonSellOrederActivity"/>
+        <activity android:name=".activity.CommoditySellOrderActivity"/>
+        <activity android:name=".activity.PostActivity"/>
+        <activity android:name=".activity.PostInfoActivity"/>
+        <activity android:name=".activity.PostSendActivity"/>
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
     </application>
 
 </manifest>

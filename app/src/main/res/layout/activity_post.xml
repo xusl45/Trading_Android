@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:id="@+id/first_head"
+        android:layout_width="match_parent"
+        android:background="@color/blue"
+        android:layout_height="100dp">
+
+
+        <com.example.trading_android.view.CircleImageView
+            android:id="@+id/title_img"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/shoe"
+            app:civ_border_color="@color/bottom_icon_up"
+            app:civ_border_width="2dp" />
+
+        <TextView
+            android:id="@+id/title_post_nickname"
+            android:layout_width="170dp"
+            android:layout_height="60dp"
+            android:textSize="25dp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:layout_marginTop="20dp"
+            android:layout_toRightOf="@id/title_img"
+            android:text="校园那些事儿"/>
+        <LinearLayout
+            android:id="@+id/first_head2_post"
+            android:layout_width="150dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="65dp"
+            android:layout_marginLeft="20dp"
+
+            android:layout_toRightOf="@id/title_post_nickname"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/first_head2_post_text"
+                android:layout_width="60dp"
+                android:layout_height="30dp"
+                android:textColor="@color/white"
+                android:layout_below="@+id/first_head2_post"
+                android:layout_alignStart="@+id/first_head2_post"
+                android:text="帖子：" />
+            <TextView
+                android:id="@+id/title_post_count"
+                android:layout_width="90dp"
+                android:textColor="@color/white"
+                android:layout_height="30dp"
+                android:text="54321"/>
+        </LinearLayout>
+    </RelativeLayout>
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="105dp"
+        android:id="@+id/first_Refresh">
+        <ListView
+            android:id="@+id/Post_Plist"
+            android:layout_marginTop="105dp"
+            android:layout_width="match_parent"
+            android:background="@color/person_sun_back"
+            android:dividerHeight="5dp"
+            android:divider="@color/person_back"
+            android:layout_height="match_parent">
+        </ListView>
+    </android.support.v4.widget.SwipeRefreshLayout>
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/first_FAB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:fabSize="normal"
+        android:scaleType="center"
+        android:layout_alignBottom="@id/first_Refresh"
+        android:layout_alignRight="@id/first_Refresh"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="5dp"
+        android:src="@drawable/add"
+        android:backgroundTint="#fff"
+
+        />
+</RelativeLayout>

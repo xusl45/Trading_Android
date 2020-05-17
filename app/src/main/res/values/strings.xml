@@ -2,8 +2,8 @@
     <string name="app_name">狗窝</string>
     <!-- 关于我的界面 -->
     <string name="home_search">搜索....</string>
-    <string name="my_cart">出售</string>
-    <string name="my_bought">历史购买</string>
+    <string name="my_cart">我的出售</string>
+    <string name="my_bought">我的购买</string>
     <string name="user_center">个人中心</string>
     <string name="about">关于</string>
     <string name="setting">设置</string>

@@ -17,6 +17,7 @@
         android:padding="10dp">
 
         <TextView
+            android:id="@+id/imageBack_home"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center"
@@ -36,11 +37,16 @@
             android:queryHint="@string/home_search"></SearchView>
     </LinearLayout>
     <include layout="@layout/include_commodity_screen"/>
-    <ScrollView
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/refresh_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+        <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scrollbars="none"
-        android:layout_weight="1"
         android:padding="2dp"
         >
         <RelativeLayout
@@ -59,5 +65,6 @@
                 android:background="#33ffffff"/>
         </RelativeLayout>
     </ScrollView>
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 </LinearLayout>
 

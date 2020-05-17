@@ -11,6 +11,7 @@ public class Commodity {
     private String type;
     private int sendPrice;
     private int sellNum;
+    private int isDelete;
 
     public int getId() {
         return id;
@@ -90,21 +91,5 @@ public class Commodity {
 
     public void setSellNum(int sellNum) {
         this.sellNum = sellNum;
-    }
-
-    @Override
-    public String toString() {
-        return "Commodity{" +
-                "id=" + id +
-                ", sortID=" + sortID +
-                ", mainImage='" + mainImage + '\'' +
-                ", name='" + name + '\'' +
-                ", subImages='" + subImages + '\'' +
-                ", detail='" + detail + '\'' +
-                ", minPrice=" + minPrice +
-                ", type='" + type + '\'' +
-                ", sendPrice=" + sendPrice +
-                ", sellNum=" + sellNum +
-                '}';
     }
 }

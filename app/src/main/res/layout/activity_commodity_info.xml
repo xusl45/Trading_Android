@@ -50,12 +50,16 @@
             android:textSize="16sp" />
 
     </RelativeLayout>
-
-    <ScrollView
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/refresh_commodityINFO"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scrollbars="none"
         android:layout_weight="1">
+        <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
         <LinearLayout
             android:layout_height="match_parent"
             android:layout_width="match_parent"
@@ -439,8 +443,8 @@
             </LinearLayout>
         </LinearLayout>>
     </ScrollView>
-
-    <LinearLayout
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+        <LinearLayout
         android:id="@+id/rl_bottom"
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -485,7 +489,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/btn_add_shopping_cart"
+            android:id="@+id/btn_add_shopping"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="12"
@@ -496,5 +500,4 @@
             android:textSize="15sp" />
 
     </LinearLayout>
-
 </LinearLayout>

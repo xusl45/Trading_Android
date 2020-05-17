@@ -46,6 +46,8 @@ import com.example.trading_android.view.ExpandableListView;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.zhouwei.mzbanner.MZBannerView;
 import com.zhouwei.mzbanner.holder.MZHolderCreator;
 import com.zhouwei.mzbanner.holder.MZViewHolder;
@@ -70,17 +72,20 @@ public class CommodityInfoActivity extends AppCompatActivity {
     private  static final int UPDATE_Commodity= 1;
     private final int  UPDATE_Size= 2;
     private  static final int UPDATE_Parameter= 3;
-
+    private  static final int ALERT_ADDsize= 4;
+    private RefreshLayout refreshLayout;
     private MZBannerView mMZBanner;
     private ImageView imageBACK;
     private TextView commodityName,commodityPrice,choseButton,dialog_goods_price;
     private TextView sortName,commodityType,sendPrice,commodityDetail,commoditySell;
+    private  TextView addBuy;
     private CustomDialog dialog;
     private LinearLayout showCommodity;
     private ListView listView;
-    private String id ,commodityStorageID;
+    private String id ;
     private String[] pictures ;
     private List<ShowImages> listPictures = new ArrayList<>();
+    private CommodityStorage commodityStorageID;
     private Commodity commodities;
     private CommoditySort commoditiesSort;
     private List<CommodityStorage> commodityStorages ;
@@ -123,6 +128,9 @@ public class CommodityInfoActivity extends AppCompatActivity {
                     sendPrice.setText(String.valueOf(commodities.getSendPrice()));
                     commodityType.setText(commodities.getType());
                     commodityDetail.setText(commodities.getDetail());
+                    break;
+                case ALERT_ADDsize:
+                    Toast.makeText(CommodityInfoActivity.this,"请选择你要购买的尺码！！！",Toast.LENGTH_LONG).show();
                     break;
                 default:
                     break;
@@ -172,6 +180,37 @@ public class CommodityInfoActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        refreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(RefreshLayout refreshlayout) {
+                refreshlayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
+                initPost();
+            }
+        });
+        addBuy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (commodityStorageID !=null)
+                {
+                    Bundle mBundle = new Bundle();
+                    mBundle.putString("commodityID",String.valueOf(commodityStorageID.getCommodityID()));
+                    mBundle.putString("price",String.valueOf(commodityStorageID.getPrice()));
+                    mBundle.putString("uid",String.valueOf(commodityStorageID.getUid()));
+                    mBundle.putString("size",String.valueOf(commodityStorageID.getSize()));
+                    mBundle.putString("commodityStorageID",String.valueOf(commodityStorageID.getId()));
+                    mBundle.putString("ordernum",String.valueOf(commodityStorageID.getOrderNumber()));
+                    mBundle.putString("img",String.valueOf(commodities.getMainImage()));
+                    mBundle.putString("name",String.valueOf(commodities.getName()));
+                    Intent intent = new Intent(CommodityInfoActivity.this, CommodityBuyACtivity.class);
+                    intent.putExtras(mBundle);
+                    startActivity(intent);
+                }else {
+                    Message msg=Message.obtain();
+                    msg.what=ALERT_ADDsize;
+                    mHandler.sendMessage(msg);
+                }
+            }
+        });
     }
     //选择尺码的弹窗
     private void Dialog() {
@@ -216,7 +255,7 @@ public class CommodityInfoActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Log.d(TAG,"XUSHULONG " +position);
-                commodityStorageID = String.valueOf(commodityStorages.get(position).getId());
+                commodityStorageID = commodityStorages.get(position);
                 PayMent(String.valueOf(commodityStorages.get(position).getSize()));
                 dialog.dismiss();
             }
@@ -243,6 +282,8 @@ public class CommodityInfoActivity extends AppCompatActivity {
         sendPrice = findViewById(R.id.sendPrice);
         commodityDetail = findViewById(R.id.commodityDetail);
         commoditySell = findViewById(R.id.commodity_sell);
+        refreshLayout =findViewById(R.id.refresh_commodityINFO);
+        addBuy =findViewById(R.id.btn_add_shopping);
     }
     //获取信息
     private void initPost() {

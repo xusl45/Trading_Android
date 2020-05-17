@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/detail_title_layout"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:orientation="horizontal"
+        android:background="@color/blue">
+
+        <LinearLayout
+            android:id="@+id/detail_title_left"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:gravity="right">
+
+            <ImageView
+                android:id="@+id/detail_back"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:src="@drawable/navigator"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:layout_toRightOf="@+id/detail_back"
+                android:gravity="center"
+                android:text="选择地址"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/address_add"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:gravity="right"
+                android:text="管理"
+                android:textColor="#FFFFFF"
+                android:textSize="18dp"
+                android:layout_marginRight="20dp"
+                android:paddingTop="20dp"/>
+        </LinearLayout>
+    </LinearLayout>
+        <ListView
+            android:id="@+id/address_list2"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent">
+
+        </ListView>
+</LinearLayout>

@@ -233,27 +233,5 @@ public class CommoditySellActivity extends AppCompatActivity {
         });
         picker.show();
     }
-    //地址选择器
-    public void addressPick() {
-        AddressPickTask task = new AddressPickTask(this);
-        task.setHideProvince(false);
-        task.setHideCounty(false);
-        task.setCallback(new AddressPickTask.Callback() {
-            @Override
-            public void onAddressInitFailed() {
-                Toast.makeText(CommoditySellActivity.this,"数据初始化失败！！！",Toast.LENGTH_LONG).show();
-            }
-
-            @Override
-            public void onAddressPicked(Province province, City city, County county) {
-                if (county == null) {
-                    Toast.makeText(CommoditySellActivity.this,province.getAreaName() + city.getAreaName(),Toast.LENGTH_LONG).show();
-                } else {
-                    Toast.makeText(CommoditySellActivity.this,province.getAreaName() + city.getAreaName() + county.getAreaName(),Toast.LENGTH_LONG).show();
-                }
-            }
-        });
-        task.execute("贵州", "毕节", "纳雍");
-    }
 
 }

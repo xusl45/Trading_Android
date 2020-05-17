@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/post_item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:stateListAnimator="@drawable/lift_on_touch"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:clickable="false">
+    <!--post_head-->
+    <RelativeLayout
+        android:id="@+id/post_item_head"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <com.example.trading_android.view.CircleImageView
+            android:id="@+id/post_userImg"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="3dp"
+            android:layout_marginTop="3dp"
+            android:src="@drawable/userimg"
+            app:civ_border_width="1dp" />
+
+        <TextView
+            android:id="@+id/post_userName"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@id/post_userImg"
+            android:text="我是要成为程序猿的懒人"
+            android:textSize="16dp" />
+
+        <TextView
+            android:id="@+id/post_Date"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:text="2019年4月3日" />
+    </RelativeLayout>
+    <!--post_body-->
+    <RelativeLayout
+        android:id="@+id/post_item_body"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/post_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="关于课堂垃圾没带走的问题"
+            android:textSize="16dp"
+            android:layout_marginLeft="40dp"
+            android:textStyle="bold"
+            />
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="#F5F5F5" />
+
+</LinearLayout>

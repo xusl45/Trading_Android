@@ -38,14 +38,4 @@ public class CommodityBanner {
     public void setIsShow(String isShow) {
         this.isShow = isShow;
     }
-
-    @Override
-    public String toString() {
-        return "CommodityBanner{" +
-                "id=" + id +
-                ", Name='" + Name + '\'' +
-                ", imgPath='" + imgPath + '\'' +
-                ", isShow='" + isShow + '\'' +
-                '}';
-    }
 }

@@ -22,6 +22,8 @@ import com.example.trading_android.util.ServerResponse;
 import com.example.trading_android.view.ExpandableGridView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -40,7 +42,8 @@ public class SearchCommodityActivity extends AppCompatActivity {
     private  static final int UPDATE_Send = 3 ;
     private  static final int UPDATE_Price = 4 ;
     public static final String TAG = "SearchCommodity";
-    private TextView textView;
+    private RefreshLayout refreshLayout;
+    private TextView textView,goBack;
     private TextView textView1;
     private TextView textView2;
     private  String name;
@@ -112,13 +115,10 @@ public class SearchCommodityActivity extends AppCompatActivity {
         name = mbundle.getString("name");
         id = mbundle.getString("id");
         sortName = mbundle.getString("sortName");
-        gridViewCommodity = (ExpandableGridView) findViewById(R.id.gridviewCommmodity);
-        searchView = findViewById(R.id.home_serachview);
+        initViewID();
         setSearchViewIntent();
 
         initPost();
-
-        textView =(TextView) findViewById(R.id.commodityByOne);
         textView.setOnClickListener(new View.OnClickListener(){
 
             @Override
@@ -128,7 +128,6 @@ public class SearchCommodityActivity extends AppCompatActivity {
                 mHandler.sendMessage(msg);
             }
         });
-        textView1 =(TextView) findViewById(R.id.commodityBysend);
         textView1.setOnClickListener(new View.OnClickListener(){
 
             @Override
@@ -138,7 +137,6 @@ public class SearchCommodityActivity extends AppCompatActivity {
                 mHandler.sendMessage(msg);
             }
         });
-        textView2 =(TextView) findViewById(R.id.commodityChoose);
         textView2.setOnClickListener(new View.OnClickListener(){
 
             @Override
@@ -148,10 +146,33 @@ public class SearchCommodityActivity extends AppCompatActivity {
                 mHandler.sendMessage(msg);
             }
         });
+        goBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         ActionBar actionBar = getSupportActionBar();
         if(actionBar != null){
             actionBar.hide();
         }
+        refreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(RefreshLayout refreshlayout) {
+                refreshlayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
+                initPost();
+            }
+        });
+    }
+
+    private void initViewID() {
+        gridViewCommodity = (ExpandableGridView) findViewById(R.id.gridviewCommmodity);
+        searchView = findViewById(R.id.home_serachview);
+        textView =(TextView) findViewById(R.id.commodityByOne);
+        textView1 =(TextView) findViewById(R.id.commodityBysend);
+        textView2 =(TextView) findViewById(R.id.commodityChoose);
+        refreshLayout =findViewById(R.id.refresh_search);
+        goBack = findViewById(R.id.imageBack_home);
     }
 
     private void initPost() {

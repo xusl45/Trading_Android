@@ -28,7 +28,7 @@
     <color name="first_head_title_color">#33ffffff</color>
     <color name="culm_color">#331dece5</color>
     <color name="first_FAB">#07c8d6</color>
-
+    <color name="color_f6">#f6f6f6</color>
     <color name="mSwipeLayout">#cccccc</color>
     <color name="txt_color_tint">#a1a1a1</color>
     <color name="txt_color_tint_">#939393</color>

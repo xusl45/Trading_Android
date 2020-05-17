@@ -13,6 +13,9 @@ public class URLpath {
     //本地测试url
     public static final String BASE_URL = "http://10.0.2.2:8080";
 
+    //本地图片测试url
+    public static final String BASE_IMAGES_URL = "http://10.0.2.2:80/images";
+
     /**
      * 基础广告地址
      */
@@ -34,20 +37,25 @@ public class URLpath {
     public static final String GET_USER_INFO_BY_UID_URL = "/findUserMessage";
 
     /**
-     * 修改用户昵称和密码的Url
+     * 修改用户信息
      */
-    public static final String MODIFY_USER_INFO_URL = "/control/changeUserInfo";
+    public static final String MODIFY_USER_INFO_URL = "/setUserMessage";
 
     /**
-     * 商品类型接口Url
+            * 商品类型接口Url
      */
     public static final String GET_COMMODITY_TYPES_URL = "/findCommoditySort";
+
+    /**
+     * 帖子类型接口Url
+     */
+    public static final String GET_POSTTYPES_URL = "/findPostSort";
     /**
      * 根据商品类型寻找商品
      */
     public static final String GET_COMMODITY_BY_SORT_URL = "/findCommodityOfSort";
     /**
-     * 分页获取商品列表Url
+     * 根据输入的商品名模糊搜索商品列表
      */
     public static final String GET_COMMODITY_URL = "/findOneCommodity";
 
@@ -63,10 +71,6 @@ public class URLpath {
      * 根据商品id获取商品预售信息
      */
     public static final String GET_COMMODITYSTORAGE_BY_ID_URL = "/showALLCommoditySizeById";
-    /**
-     * 根据输入的商品名模糊搜索商品列表
-     */
-    public static final String GET_COMMODITY_BY_NAME_URL = "/business/queryCommodityInfoByName?CommodityName=";
 
     /**
      * 增加挂售商品尺码 价格 用户id
@@ -74,29 +78,87 @@ public class URLpath {
     public static final String POST_ADD_TO_COMMODITYSTORAGE_URL = "/insertCommoditySize";
 
     /**
-     * 购买Url
+     * 查询用户所有预售记录
      */
-    public static final String POST_BUY_URL = "/business/buy";
+    public static final String GET_CommoditySELL_Order_URL = "/showALLCommoditySize";
+    /**
+     * 根据id取消预售记录
+     */
+    public static final String Delete_CommoditySELL_Order_URL = "/deleteCommoditySize";
 
     /**
-     * 刷新购物车Url
+     * 刷新得到用户所有收获地址Url
      */
-    public static final String POST_REFRESH_CART_URL = "/business/refreshCart";
+    public static final String GET_USER_ADDRESS_URL = "/findALLUserAddress";
+    /**
+     * 插入收货地址URL
+     */
+    public static final String INSERT_USER_ADDRESS_URL = "/insertUserAddress";
+    /**
+     * 更新收货地址URL
+     */
+    public static final String UPDATE_USER_ADDRESS_URL = "/updateUserAddress";
+    /**
+     * 删除收货地址URL
+     */
+    public static final String Delete_USER_ADDRESS_URL = "/deleteUserAddress";
+    /**
+     * 上传图片
+     */
+    public static final String POST_IMG_URL = "/actiontUploadImage";
 
     /**
-     * 从购物车中删除商品Url
+     * 购买商品Url
      */
-    public static final String POST_DELETE_URL = "/business/deleteFromCart";
+    public static final String POST_BuyCOMMODITY_URL = "/insertCommodityOrder";
 
     /**
-     * 查询用户购物车数据Url
+     * 查询用户所有购买记录
      */
-    public static final String GET_QUERY_CART_URL = "/business/queryCartList?limit=9999999&page=1";
+    public static final String GET_CommodityBUY_URL = "/findCommodityOrderBidByID";
+    /**
+     * 查询用户所又出售记录
+     */
+    public static final String GET_CommoditySell_URL = "/findCommodityOrderUidByID";
+    /**
+     * 点击发货之后
+     */
+    public static final String POSR_CommodityAFTER_URL = "/sendCommodityAfter";
+    /**
+     * 点击收货之后
+     */
+    public static final String POSR_CommodityReceiving_URL = "/sendCommodityReceiving";
+
 
     /**
-     * 查询购买历史Url
+     * 查询单挑购买记录
      */
-    public static final String GET_QUERY_BUY_HISTORY_URL = "/business/queryBoughtList?limit=9999999&page=1";
+    public static final String GET_Commodity_BUY_HISTORY_URL = "/findCommodityOrderByID";
+    /**
+     * 查询单挑帖子
+     */
+    public static final String GET_Post_one_HISTORY_URL = "/findPostByID";
+    /**
+     * 查询某个分类中发帖记录
+     */
+    public static final String GET_Post_HISTORY_URL = "/findPostBySortID";
+    /**
+     * 点赞
+     */
+    public static final String POSR_INSERT_GOOD_URL = "/UpdatePostGood";
+    /**
+     * 发帖
+     */
+    public static final String POSR_Post_INSERT_URL = "/insertPost";
+    /**
+     * 回复
+     */
+    public static final String POSR_Reply_INSERT_URL = "/insertReply";
+    /**
+     * 查询所有回帖
+     */
+    public static final String Get_Post_reply_URL = "/findReplyByTopicID";
+
 
 
     /**

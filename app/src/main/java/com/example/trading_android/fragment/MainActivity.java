@@ -26,7 +26,7 @@ public class MainActivity extends FragmentActivity implements
 
     private FragmentTabHost mTabHost;
     private LayoutInflater layoutInflater;
-    private Class fragmentArray[] = { Fragment1.class, Fragment2.class, Fragment3.class };
+    private Class fragmentArray[] = { Fragment2.class,Fragment1.class, Fragment3.class };
     private int imageViewArray[] = { R.drawable.tab_home_btn, R.drawable.tab_view_btn, R.drawable.tab_person_btn };
     private String textViewArray[] = { "社区", "购买","我"};
     private List<Fragment> list = new ArrayList<Fragment>();
@@ -87,8 +87,8 @@ public class MainActivity extends FragmentActivity implements
 
     /*初始化Fragment*/
     private void initPage() {
-        Fragment1 fragment1 = new Fragment1();
         Fragment2 fragment2 = new Fragment2();
+        Fragment1 fragment1 = new Fragment1();
         Fragment3 fragment3 = new Fragment3();
         list.add(fragment1);
         list.add(fragment2);
@@ -137,5 +137,8 @@ public class MainActivity extends FragmentActivity implements
         int position = mTabHost.getCurrentTab();
         vp.setCurrentItem(position);//把选中的Tab的位置赋给适配器，让它控制页面切换
     }
+
+
+
 
 }

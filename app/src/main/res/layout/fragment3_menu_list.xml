@@ -10,7 +10,7 @@
     <LinearLayout style="@style/wrap_layout">
         <!-- 上圆角-->
         <LinearLayout
-            android:id="@+id/menu_cart"
+            android:id="@+id/menu_sell"
             style="@style/top_layout">
 
             <TextView
