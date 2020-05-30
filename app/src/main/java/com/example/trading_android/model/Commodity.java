@@ -11,7 +11,7 @@ public class Commodity {
     private String type;
     private int sendPrice;
     private int sellNum;
-    private int isDelete;
+    private String isDelete;
 
     public int getId() {
         return id;
@@ -91,5 +91,13 @@ public class Commodity {
 
     public void setSellNum(int sellNum) {
         this.sellNum = sellNum;
+    }
+
+    public String getIsDelete() {
+        return isDelete;
+    }
+
+    public void setIsDelete(String isDelete) {
+        this.isDelete = isDelete;
     }
 }

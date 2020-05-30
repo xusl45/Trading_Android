@@ -121,7 +121,7 @@ public class CommodityBuyACtivity   extends AppCompatActivity {
         commoditySize.setText(Double.parseDouble(size)+"码");
         commodityPrice.setText("￥"+price);
         commodityName.setText(name);
-        finalPrice.setText("￥"+(Integer.parseInt(price)+Integer.parseInt(price)*0.05+23));
+        finalPrice.setText("￥"+(int)(Integer.parseInt(price)+Integer.parseInt(price)*0.05+23));
         imageBACK.setOnClickListener(new View.OnClickListener(){
 
             @Override

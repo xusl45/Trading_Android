@@ -21,12 +21,13 @@
         <activity android:name=".fragment.MainActivity">
         </activity>
         <activity android:name=".activity.components.SearchViewActivity"/>
-        <activity android:name=".activity.LoginActivity">
+        <activity android:name=".activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".activity.LoginActivity">
         </activity>
         <activity android:name=".activity.SignUPActivity"></activity>
         <activity android:name=".activity.SearchCommodityActivity"/>
@@ -47,6 +48,8 @@
         <activity android:name=".activity.PostActivity"/>
         <activity android:name=".activity.PostInfoActivity"/>
         <activity android:name=".activity.PostSendActivity"/>
+        <activity android:name=".activity.PersonSetActivity"/>
+        <activity android:name=".activity.PersonPostActivity"/>
 
         <provider
             android:name="android.support.v4.content.FileProvider"

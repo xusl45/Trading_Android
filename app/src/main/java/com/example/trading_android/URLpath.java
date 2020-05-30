@@ -57,6 +57,10 @@ public class URLpath {
     /**
      * 根据输入的商品名模糊搜索商品列表
      */
+    public static final String GET_COMMODITY_Hot_URL = "/findHotCommodity";
+    /**
+     * 根据输入的商品名模糊搜索商品列表
+     */
     public static final String GET_COMMODITY_URL = "/findOneCommodity";
 
     /**
@@ -142,6 +146,10 @@ public class URLpath {
      * 查询某个分类中发帖记录
      */
     public static final String GET_Post_HISTORY_URL = "/findPostBySortID";
+    /**
+     * 查询某个分类中发帖记录
+     */
+    public static final String GET_Post_HISTORY_For_URL = "/findPostByUid";
     /**
      * 点赞
      */

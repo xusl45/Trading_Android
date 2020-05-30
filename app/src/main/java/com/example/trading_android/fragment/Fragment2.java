@@ -131,7 +131,7 @@ public class Fragment2 extends Fragment {
     }
 
     private void getCommodity() {
-        final String urlFindMessage = URLpath.BASE_URL+URLpath.GET_COMMODITY_URL;
+        final String urlFindMessage = URLpath.BASE_URL+URLpath.GET_COMMODITY_Hot_URL;
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -139,7 +139,6 @@ public class Fragment2 extends Fragment {
                     String username = ((MainActivity) getActivity()).getUsername();
                     OkHttpClient client = new OkHttpClient();
                     RequestBody requestBody = new FormBody.Builder()
-                            .add("name","詹姆斯")
                             .build();
                     Request request = new Request.Builder()
                             .url(urlFindMessage)

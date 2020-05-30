@@ -16,10 +16,10 @@ import android.widget.RelativeLayout;
 
 import com.example.trading_android.R;
 import com.example.trading_android.URLpath;
-import com.example.trading_android.adapter.CommoditySellListAdapter;
-import com.example.trading_android.adapter.CommoditySellOrderAdapter;
+import com.example.trading_android.adapter.CommodityBuyedlListAdapter;
+import com.example.trading_android.adapter.PostShowAdapter;
 import com.example.trading_android.model.CommodityRecord;
-import com.example.trading_android.model.CommodityStorage;
+import com.example.trading_android.model.Post;
 import com.example.trading_android.util.ServerResponse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -35,34 +35,30 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-//商品的出售订单
-public class CommoditySellOrderActivity extends AppCompatActivity {
-
+public class PersonPostActivity extends AppCompatActivity {
     private static final String TAG = "COMMODITYBUYActivity" ;
-    private  static final int UPDATE_SELL= 1;
-    private  static final int UPDATE_NOTSELL= 2;
+    private  static final int UPDATE_BUYEDE= 1;
+    private  static final int UPDATE_NOTBUYED= 2;
     private  static final int UPDATE_BUY= 3;
     private RefreshLayout refreshLayout;
-    private LinearLayout addressMessage,personMessage;
     private ImageView imageView;
     private RelativeLayout relativeLayout;
     private ListView listView;
     private String uid;
-    private List<CommodityStorage> commodityStorages ;
-    private ServerResponse<List<CommodityStorage>> serverResponse;
+    private List<Post> posts;
+    private ServerResponse<List<Post>> serverResponse;
+
 
     private Handler mHandler = new Handler(){
 
         public void handleMessage(Message msg) {
             switch (msg.what) {
-                case UPDATE_NOTSELL:
+                case UPDATE_NOTBUYED:
                     relativeLayout.setVisibility(View.VISIBLE);
                     break;
-                case UPDATE_SELL:
-//                    CommoditySellListAdapter listAdapter = new  CommoditySellListAdapter(commodityRecords,PersonCommoditySellActivity.this);
-//                    listView.setAdapter(listAdapter);
-                    CommoditySellOrderAdapter lAdapter = new CommoditySellOrderAdapter(commodityStorages,CommoditySellOrderActivity.this);
-                    listView.setAdapter(lAdapter);
+                case UPDATE_BUYEDE:
+                    PostShowAdapter ladpter = new PostShowAdapter(posts,PersonPostActivity.this);
+                    listView.setAdapter(ladpter);
                     break;
                 default:
                     break;
@@ -74,7 +70,7 @@ public class CommoditySellOrderActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sell_order);
+        setContentView(R.layout.activity_person_post);
         SharedPreferences sharedPreferences=getSharedPreferences("loginCentent", Context.MODE_PRIVATE);
         uid=sharedPreferences.getString("uid",null);
         ActionBar actionBar = getSupportActionBar();
@@ -99,18 +95,18 @@ public class CommoditySellOrderActivity extends AppCompatActivity {
     }
 
     private void initPost() {
-        getALLCommodityStorage();
+        getCommodityBuy();
     }
 
-    private void getALLCommodityStorage() {
-        final String urlFindMessage = URLpath.BASE_URL+URLpath.GET_CommoditySELL_Order_URL;
+    private void getCommodityBuy() {
+        final String urlFindMessage = URLpath.BASE_URL+URLpath.GET_Post_HISTORY_For_URL;
         new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
                     OkHttpClient client = new OkHttpClient();
                     RequestBody requestBody = new FormBody.Builder()
-                            .add("uid",uid)
+                            .add("id",uid)
                             .build();
                     Request request = new Request.Builder()
                             .url(urlFindMessage)
@@ -119,15 +115,15 @@ public class CommoditySellOrderActivity extends AppCompatActivity {
                     Response response = client.newCall(request).execute();
                     String responsedate = response.body().string();
                     Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
-                    serverResponse = gson.fromJson(responsedate,new TypeToken<ServerResponse<List<CommodityStorage>>>(){}.getType());
-                    commodityStorages = (List<CommodityStorage>) serverResponse.getData();
-                    if (commodityStorages.size() ==0) {
+                    serverResponse = gson.fromJson(responsedate,new TypeToken<ServerResponse<List<Post>>>(){}.getType());
+                    posts =  serverResponse.getData();
+                    if (posts.size() == 0 ) {
                         Message msg= Message.obtain();
-                        msg.what=UPDATE_NOTSELL;
+                        msg.what=UPDATE_NOTBUYED;
                         mHandler.sendMessage(msg);
                     }else{
                         Message msg= Message.obtain();
-                        msg.what=UPDATE_SELL;
+                        msg.what=UPDATE_BUYEDE;
                         mHandler.sendMessage(msg);
                     }
                 } catch (Exception e) {
@@ -135,14 +131,12 @@ public class CommoditySellOrderActivity extends AppCompatActivity {
                 }
             }
         }).start();
-
     }
-
 
     private void initViewID() {
         imageView = findViewById(R.id.detail_back);
         relativeLayout =findViewById(R.id.user_info_show_layout);
-        listView =findViewById(R.id.commodity_sellorder_list);
-        refreshLayout = findViewById(R.id.refresh_person_sellORDER);
+        listView =findViewById(R.id.post_list);
+        refreshLayout = findViewById(R.id.refresh_personpost);
     }
 }

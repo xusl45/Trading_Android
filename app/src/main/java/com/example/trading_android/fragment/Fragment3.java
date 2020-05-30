@@ -25,7 +25,9 @@ import com.example.trading_android.activity.LoginActivity;
 import com.example.trading_android.activity.PersonCommodityBuyActivity;
 import com.example.trading_android.activity.PersonCommoditySellActivity;
 import com.example.trading_android.activity.PersonMessageActivity;
+import com.example.trading_android.activity.PersonPostActivity;
 import com.example.trading_android.activity.PersonSellOrederActivity;
+import com.example.trading_android.activity.PersonSetActivity;
 import com.example.trading_android.model.User;
 import com.example.trading_android.util.ServerResponse;
 import com.google.gson.Gson;
@@ -49,7 +51,7 @@ public class Fragment3 extends Fragment {
     private Button button;
     private ImageView person_img;
     private TextView person_name;
-    private LinearLayout person_message,person_Buyed,person_Selled;
+    private LinearLayout person_message,person_Buyed,person_Selled,person_Seted,person_Posted;
     private RelativeLayout person_title;
 
     private Bitmap result;
@@ -122,6 +124,22 @@ public class Fragment3 extends Fragment {
                 startActivity(intent);
             }
         });
+        person_Posted.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(
+                        getActivity(), PersonPostActivity.class);
+                startActivity(intent);
+            }
+        });
+        person_Seted.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(
+                        getActivity(), PersonSetActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
         private void initViewID() {
@@ -131,6 +149,8 @@ public class Fragment3 extends Fragment {
         person_Selled = getActivity().findViewById(R.id.menu_sell);
         person_message = getActivity().findViewById(R.id.menu_user);
         person_title = getActivity().findViewById(R.id.person_rela);
+        person_Seted = getActivity().findViewById(R.id. menu_setting);
+        person_Posted = getActivity().findViewById(R.id.menu_post);
     }
 
     private void initPost() {getMessage();

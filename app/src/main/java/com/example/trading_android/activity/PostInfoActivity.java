@@ -91,8 +91,10 @@ public class PostInfoActivity extends AppCompatActivity {
                     });
                     break;
                 case INSERT_Reply:
-                    replyadd.setFocusable(false);
-                    replyadd.setText("");
+                    Log.d("xushulong123456","测试评论功能");
+//                    replyadd.setFocusable(false);
+//
+//                    replyadd.setText("");
                     Toast.makeText(PostInfoActivity.this,"回复发表成功！",Toast.LENGTH_SHORT).show();
                     break;
                 case UPDATE_Post:
@@ -173,6 +175,7 @@ public class PostInfoActivity extends AppCompatActivity {
                     toUid = String.valueOf(replyReturns.get(toSOMEONE).getReply().getFormUid());
                 }
                 replyContent  = replyadd.getText().toString();
+                replyadd.setText("");
                 sendReply();
             }
         });
@@ -292,6 +295,7 @@ public class PostInfoActivity extends AppCompatActivity {
         refreshLayout =findViewById(R.id.refresh_POSTINFO);
         postGood = findViewById(R.id.post_good);
     }
+
 
     private void initPost() {
         getReply();
